@@ -1,0 +1,90 @@
+.gateway-monitor-page{
+    width: 100%;
+    height: calc(~"100% - 55px");
+    &>.section-container.monitor {
+      background: #fff;
+    }
+    &>.section-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      .section-header{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        height: calc(~'100% - 200px');
+        h3 {
+          padding: 0;
+          margin: 0;
+          height: 40px;
+          line-height: 40px;
+        }
+        .tooltip-box {
+          position: absolute;
+          top: 10px;
+          right: 25px;
+          span {
+            margin-bottom: 5px;
+            vertical-align: middle;
+            color: #9E9E9E;
+            margin-left: 10px;
+            &::before {
+              content: ' ';
+              display: inline-block;
+              width: 8px;
+              height: 8px;
+              border-radius: 100%;
+              margin-right: 10px;
+            }
+            &:nth-child(1)::before {
+              background: #0AA194;
+            }
+            &:nth-child(2)::before {
+              background: #E91E63;
+            }
+            &:nth-child(3)::before {
+              background: #D0CFCF;
+            }
+          }
+ 	      }
+      }
+      .section-content {
+        height: 200px;
+        padding-top: 10px;
+        .el-table {
+          height: 100%;
+          .cell {
+            span {
+              display: flex;
+              justify-content: center;
+              padding-top: 5px;
+              width: 25px;
+              height: 25px;
+              background:#2A3240;
+              border-radius: 100%;
+              cursor: pointer;
+              img {
+                width: 14px;
+                height: 14px;
+              }
+            }
+          }
+          i {
+            font-style: normal;
+          }
+          .Running, .running{
+            font-size: 12px;
+            color: #35D8A5;
+          }
+          .Dead, .dead{
+            // font-weight: 600;
+            font-size: 12px;
+            color: #DD4F3F;
+          }
+        }
+      }
+    }
+}

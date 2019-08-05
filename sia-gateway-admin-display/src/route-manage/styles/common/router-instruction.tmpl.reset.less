@@ -1,0 +1,20 @@
+.mask-router-instruction{
+    .task-list-table{
+        height: 100%;
+        .el-table__body-wrapper{
+            height: calc(~"100% - 55px");
+            overflow-y: auto;
+        }
+        th.is-leaf {
+          background-color: #cee2e0;
+          border-bottom: 0;
+          border-right: 1px solid #fff;
+          color: #333333;
+          height: 50px;
+          padding: 0;
+        }
+        th.is-center.is-leaf:last-child:not(.gutter) {
+          border-right: 0;
+        }
+    }
+}

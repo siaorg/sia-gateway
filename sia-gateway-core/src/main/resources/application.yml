@@ -1,0 +1,176 @@
+########################################################
+###  ZUUL 网关信息配置
+########################################################
+spring.application.name: DEV-GATEWAY-CORE
+eureka.client.serviceUrl.defaultZone: http://127.0.0.1:19002/eureka/
+eureka.instance.preferIpAddress: true
+eureka.instance.instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+
+zuul.version: sag_1.0_@timestamp@
+zuul.desc: DEV-GATEWAY-CORE
+server.port: 8080
+zuul.debug.request: true
+zuul.include-debug-header: true
+
+#debug: true
+#trace: true
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          netflix: debug
+#zuul超时设置
+zuul:
+  host:
+    socket-timeout-millis: 180000
+    connect-timeout-millis: 180000
+  ribbon-isolation-strategy: thread
+  threadPool:
+    useSeparateThreadPools: true
+    threadPoolKeyPrefix: zuulgw
+
+###ribbon.filter.metadata.enabled: false
+
+
+zuul.retryable: true
+
+#zuul设置敏感字段
+zuul.sensitiveHeaders:
+
+
+#ribbon超时设置
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 6000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 3
+  OkToRetryOnAllOperations: true
+  ServerListRefreshInterval: 5000
+  eureka:enable: true
+
+
+#熔断器超时设置
+hystrix:
+  threadpool:
+    default:
+      ##并发执行的最大线程数，默认10
+      coreSize: 100
+      ##BlockingQueue的最大队列数
+      maxQueueSize: 150
+      ##即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+      queueSizeRejectionThreshold: 150
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          strategy: THREAD
+          semaphore:
+            maxConcurrentRequests: 3000
+          thread:
+            timeoutInMilliseconds: 150000 
+      #这些参数可以应用于Hystrix的THREAD和SEMAPHORE策略
+      #如果并发数达到该设置值，请求会被拒绝和抛出异常并且fallback不会被调用。默认10
+      fallback.isolation.semaphore.maxConcurrentRequests: 300
+
+#   threadpool:
+#     default:
+#       coreSize: 50
+########################################################
+###  ZUUL actuator功能
+########################################################
+management.security.enabled: false
+
+zuul.super.enabled : false
+
+########################################################
+###  ZUUL Filter功能配置
+########################################################
+
+#是否开启Debug功能
+zuul.debug.enabled: false
+
+#是否藍綠部署功能
+zuul.ribbonroute.enabled: true
+
+#是否开启log功能
+zuul.log.enabled: true
+
+#是否开启限流功能
+zuul.ratelimit.enabled: true
+
+#是否开启统计功能
+zuul.statistic.enabled: true
+
+########################################################
+###  数据库 mysql基本配置；
+########################################################
+spring.datasource.skytrain:
+  url: jdbc:mysql://127.0.0.1:3306/zoner?characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false
+  username: root
+  password: ####
+  driverClassName: com.mysql.jdbc.Driver
+
+########################################################
+###REDIS (RedisProperties) Shiro - redis基本配置
+########################################################
+# 类型可设置为[single（单点）|sentinel（哨兵）|cluster（集群）]
+redis.type: single
+redis.connect.url: 127.0.0.1:6379
+# 只有哨兵模式用到，单点和集群模式不用
+redis.master: 
+# 按需配置
+redis.password: 
+# 只有单点和哨兵模式用到，集群模式不用
+redis.db.index: 1
+# pool settings ...
+# 最大连接数，默认8个，一些低版本的包是maxActive，如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)
+redis.max.active: 500
+# 控制一个pool最多有多少个状态为idle(空闲的)的jedis实例
+redis.max.idle: 10
+# 控制一个pool最少有多少个状态为idle(空闲的)的jedis实例
+redis.min.idle: 5
+# 等待可用连接的最大时间，单位毫秒，默认值为-1，表示永不超时。如果超过等待时间，则直接抛出JedisConnectionException；
+redis.max.wait: 60000
+# 在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的
+redis.testOnBorrow: true
+# jedis调用returnObject方法时，是否进行有效检查
+redis.testOnReturn: false
+
+########################################################
+###   动态Filter配置；
+########################################################
+
+#动态filter全局开关
+zuul.filter.dynamic: true
+#动态filter包全限定名
+zuul.java.packageName: com.creditease.gateway.filter.biz
+#刷新频率
+zuul.filter.interval: 1
+
+# 安全认证服务
+spring.gateway.admin.name: API-GATEWAY-ADMIN
+
+########################################################
+### KAFKA 基本配置
+########################################################
+spring.kafka.bootstrap-servers: 127.0.0.1:9092
+# 生产者和消费者topic前缀
+spring.kafka.topicPrefix: sag.
+
+spring.kafka.producer.numOfPartition: 4
+spring.kafka.producer.retries: 2
+# 每次批量发送消息的数量
+spring.kafka.producer.batch-size: 16384
+spring.kafka.producer.buffer-memory: 33554432
+
+
+#日志记录
+logging.file: ../viewlogs/applog/${spring.application.name}.log
+
+#网关预警服务邮箱接口
+ALARM_EMAIL_ADDRESS: http://127.0.0.1:8070/alarmEmail/sendAlarmEmail
+
+zuul.filter.url.maxqueueSize: 1000

@@ -1,0 +1,102 @@
+########################################################
+###  Admin 基本配置信息
+########################################################
+spring.application.name: DEV-GATEWAY-ADMIN
+eureka.client.serviceUrl.defaultZone: http://127.0.0.1:19002/eureka/
+eureka.instance.preferIpAddress: true
+eureka.instance.instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+eureka.instance.hostname: DEV-ADMIN-SERVER
+eureka.instance.prefer-ip-address: true
+server.port: 8090
+spring.gateway.log.enable: true
+
+spring.admin.ftpTemp.path: C:/Users/Desktop/ApiGateway
+spring.admin.ftp.path: C:/Users/Desktop/ApiGateway/lib
+
+spring.role.isadmin: false
+
+########################################################
+###  数据库 mysql基本配置
+########################################################
+spring.datasource.skytrain:
+  url: jdbc:mysql://127.0.0.1:3306/zoner?characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false
+  username: root
+  password: ####
+  driverClassName: com.mysql.jdbc.Driver
+
+########################################################
+###  REDIS (RedisProperties) Shiro - redis基本配置
+########################################################
+# 类型可设置为[single（单点）|sentinel（哨兵）|cluster（集群）]
+redis.type: single
+redis.connect.url: 127.0.0.1:6379
+# 只有哨兵模式用到，单点和集群模式不用
+redis.master:
+# 按需配置
+redis.password:
+# 只有单点和哨兵模式用到，集群模式不用
+redis.db.index: 1
+# pool settings ...
+# 最大连接数，默认8个，一些低版本的包是maxActive，如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)
+redis.max.active: 500
+# 控制一个pool最多有多少个状态为idle(空闲的)的jedis实例
+redis.max.idle: 10
+# 控制一个pool最少有多少个状态为idle(空闲的)的jedis实例
+redis.min.idle: 5
+# 等待可用连接的最大时间，单位毫秒，默认值为-1，表示永不超时。如果超过等待时间，则直接抛出JedisConnectionException；
+redis.max.wait: 60000
+# 在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的
+redis.testOnBorrow: true
+# jedis调用returnObject方法时，是否进行有效检查
+redis.testOnReturn: false
+
+########################################################
+###  KAFKA 基本配置
+########################################################
+spring.kafka.bootstrap-servers: 127.0.0.1:9092
+# 生产者和消费者topic前缀
+spring.kafka.topicPrefix: sag.
+
+spring.kafka.producer.numOfPartition: 4
+spring.kafka.producer.retries: 2
+# 每次批量发送消息的数量
+spring.kafka.producer.batch-size: 16384
+spring.kafka.producer.buffer-memory: 33554432
+
+# ZUUL actuator功能
+management.security.enabled: false
+
+# AOP
+spring.aop.auto: true
+
+#是否开启Debug功能
+zuul.debug.enabled: true
+
+#token有效时间
+token.expiration: 7200
+
+redirectUrl: http://127.0.0.1:9000/
+
+logging.file: ../logs/${spring.application.name}.log
+
+# KIBANA
+spring.kibana.url: http://127.0.0.1:5601/api/saved_objects/?type=index-pattern&fields=title&per_page=10000
+spring.kibana.url.create: http://127.0.0.1:5601/es_admin/.kibana/index-pattern/
+
+########################################################
+###  预警邮件配置
+########################################################
+
+#网关预警服务邮箱接口
+ALARM_EMAIL_ADDRESS: http://127.0.0.1:8070/alarmEmail/sendAlarmEmail
+
+
+# hystrix dashboard conf
+monitorName: API-GATEWAY-MONITOR
+# fresh cycle
+delay: 10000
+
+## 开源代码登录标识
+OPEN_LOGIN_FLAG: true
+
+

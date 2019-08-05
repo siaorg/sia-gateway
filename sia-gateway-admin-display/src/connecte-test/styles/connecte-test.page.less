@@ -1,0 +1,64 @@
+.connecte-test-page {
+  width: 100%;
+  height: calc(~"100% - 55px");
+  & > .section-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .section-content{
+      // display: flex;
+      // flex-direction: column;
+      padding-top: 30px;
+      .el-input-group__append {
+        background: transparent;
+      }
+      textarea.params-info-text {
+        background: transparent;
+      }
+      .test-resolve.active {
+        margin: 10px 0;
+        // flex: 1;
+        height: calc(~"100% - 155px");
+      }
+      .test-resolve {
+        margin: 10px 0;
+        // flex: 1;
+        height: calc(~"100% - 45px");
+        h2::before{
+          content: ' ';
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          background-image: linear-gradient(-135deg, #2DC9EB 0%, #14D2B8 100%);
+          border-radius: 100%;
+          margin-right: 8px;
+        }
+        h2{
+          height: 40px;
+          padding: 0;
+          margin: 0;
+          font-size: 16px;
+          color: #FFFFFF;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 40px;
+        }
+        .respones-info {
+          margin-top: 10px;
+          height: calc(~"100% - 52px");
+          overflow: hidden;
+          .respones-info-text {
+            width: 100%;
+            height: 100%;
+            resize: none;
+            color: #fff;
+            border: 1px solid #4B5061;
+          }
+          textarea.respones-info-text:disabled {
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,87 @@
+.mask-task-list-manage{
+    z-index: 2000;
+    background-color: rgba(46,49,62,0.63);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    .mask-content{
+      width: 670px;
+      margin: 0 auto;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #373C4F;
+      box-shadow: 6px 9px 17px 0 rgba(22,21,21,0.45);
+      border-radius: 1px;
+      // padding: 25px;
+        .mask-main-title{
+          padding: 20px 15px 0 20px;
+          font-size: 16px;
+          color: #fff;
+          overflow: hidden;
+          border-radius: 2px 2px 0 0;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          text-align: left;
+            .close-icon {
+              width: 24px;
+              height: 24px;
+              float: right;
+              background: url('../../../common/images/close.png') no-repeat;
+              cursor: pointer;
+          }
+        }
+        .more.info {
+          height: 300px;
+        }
+        .info {
+          color: #fff;
+          width: 100%;
+          height: 250px;
+          margin: 25px auto 10px;
+          overflow-y: auto;
+          p{
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+            // height: 40px;
+            line-height: 30px;
+            span{
+              &:nth-child(1){
+                color: #C1C5CF;
+                width: 155px;
+                text-align: right;
+              }
+            }
+            span.msg {
+              flex: 1;
+              word-break: break-all;
+              height: auto;
+              padding-right: 15px;
+            }
+          }
+          p.router-list {
+            padding: 0 20px;
+            span {
+              height: 30px;
+              line-height: 26px;
+              padding: 0 8px;
+              border: 2px solid #15d8e3;
+              border-radius: 30px;
+              margin-bottom: 10px;
+              &:nth-child(1){
+                width: auto;
+                text-align: center;
+              }
+              &:not(:last-child){
+                margin-right: 10px;
+              }
+            }
+          }
+        }
+    }
+}
+  

@@ -1,0 +1,95 @@
+.mask-add-task-manage{
+    z-index: 2000;
+    background-color: rgba(46,49,62,0.63);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    .mask-content{
+      width: 670px;
+      margin: 0 auto;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #373C4F;
+      box-shadow: 6px 9px 17px 0 rgba(22,21,21,0.45);
+      border-radius: 1px;
+        .mask-main-title{
+          padding: 20px 15px 0 20px;
+          font-size: 16px;
+          color: #fff;
+          overflow: hidden;
+          border-radius: 2px 2px 0 0;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          text-align: left;
+            .close-icon {
+              width: 24px;
+              height: 24px;
+              float: right;
+              background: url('../../../common/images/close.png') no-repeat;
+              cursor: pointer;
+          }
+        }
+        .info::-webkit-scrollbar, {width:10px; height:10px; background-color:transparent;} /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+        .info::-webkit-scrollbar-track, {background-color:#292D40; -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);} /*定义滚动条轨道 内阴影+圆角*/
+        .info::-webkit-scrollbar-thumb, {background-color:#4B5061; -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);} /*定义滑块 内阴影+圆角*/
+        .info {
+          width: 95%;
+          height: 350px;
+          max-height: 500px;
+          margin: 15px auto 20px;
+          overflow: auto;
+          .introude {
+            margin-bottom: 10px;
+            margin-right: 10px;
+            border: 1px solid rgba(245,166,35,0.39);
+            border-radius: 2px;
+            font-size: 12px;
+            color: #F5A623;
+            height: 30px;
+            line-height: 30px;
+            background: rgba(255,194,94,0.18) url('../../images/warnning.png') no-repeat 10px center;
+            padding-left: 30px;
+
+          }
+          .third-group-list {
+            height: calc(~'100% - 40px');
+            li {
+              display: flex;
+              flex-wrap: wrap;
+              margin-top: 10px;
+              margin-right: 10px;
+              padding: 0 10px;
+              border-radius: 5px;
+              color: #666;
+              background: #313544;
+              border-radius: 1px;
+              height: 90px;
+              padding: 10px;
+              span {
+                width: 100%;
+                font-size: 12px;
+                color: #C1C5CF;
+                line-height: 25px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                &:nth-child(3){
+                  width: 100%;
+                }
+                i {
+                  font-style: normal;
+                  font-weight: 600;
+                }
+              }
+            }
+            li:last-child{
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+  }
+  

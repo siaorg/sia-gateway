@@ -1,0 +1,254 @@
+@import './../global.less';
+
+.left-menu {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 200px;
+    height: 100%;
+    background-color: @default-left-menu-background;
+
+    .logo {
+        user-select: none;
+        user-select: none;
+        // text-align: center;
+        color: #fff;
+        // font-weight: 600;
+        line-height: 55px;
+        height: 55px;
+        background: #444A5E;
+        font-size: 18px;
+        padding-left: 10px;
+        span {
+            vertical-align: middle;
+            &:nth-child(1) {
+                display: inline-block;
+                width: 35px;
+                height: 35px;
+                background-image: linear-gradient(-135deg, #2DC9EB 0%, #14D2B8 100%);
+                border-radius: 100%;
+                margin-right: 10px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+    .el-menu {
+        background-color: transparent;
+        border: none;
+
+        .el-icon-arrow-down:before {
+            content: "\E60B";
+            color: @default-left-menu-font-color;
+        }
+
+        .el-submenu__title, .el-menu-item {
+            font-size: 15px;
+            border-left: 1px solid  @default-left-menu-background;
+            height: 40px;
+            line-height: 40px;
+            margin-bottom: 5px;
+            color: @default-left-menu-font-color;
+            // font-weight: 600;
+            &:nth-child(1){
+                margin-top: 10px;
+            }
+        }
+
+        .el-submenu__title:hover, .el-menu-item:focus, .el-menu-item:hover {
+            border-left-color: #15D8E3;
+            width: calc(~'100% - 0px');
+            box-sizing: border-box;
+            background-color: @default-left-menu-hover-background;
+            color: #15D8E3;
+
+            .el-icon-arrow-down:before {
+                color: #15D8E3;
+                right: 20px;
+            }
+        }
+        .el-menu-item.is-active{
+            border-left-color: #15D8E3;
+            background-color: @default-left-menu-hover-background;
+            color: #15D8E3 !important;
+        }
+        ul.el-menu{
+            li.is-active{
+                background-color: @default-left-menu-hover-background;
+                color: #15D8E3 !important;
+            }
+        }
+    }
+
+    .el-menu-vertical > li,
+    .el-menu-vertical > li > .el-submenu__title {
+        // background-repeat: no-repeat;
+        // background-position: 20px center;
+        text-indent: 10px;
+        i {
+            text-indent: 0;
+        }
+    }
+
+    .el-menu-vertical > li:before  {
+        margin-top: 12px;
+        float: left;
+        content: " ";
+        width: 18px;
+        height: 16px;
+        color: #ccc;
+        background-size: contain;
+        background-repeat:no-repeat;
+    }
+    // DeskTop 
+    .el-menu-vertical > li:nth-child(1):before  {
+        background-image: url('../../images/desktop-icon.svg');
+    }
+    .el-menu-vertical > li.is-active:nth-child(1),
+    .el-menu-vertical > li:nth-child(1):hover {
+        &:before {
+            background-image: url('../../images/desktop-icon-ck.svg');
+        }
+    }
+    // 首页 
+    .el-menu-vertical > li:nth-child(2):before  {
+        background-image: url('../../images/home-icon.svg');
+    }
+
+    .el-menu-vertical > li.is-active:nth-child(2),
+    .el-menu-vertical > li:nth-child(2):hover {
+        &:before {
+            background-image: url('../../images/home-icon-ck.svg');
+        }
+    }
+    // 路由管理 
+    .el-menu-vertical > li:nth-child(3):before {
+        background-image: url('../../images/router-icon.svg');
+    }
+
+    .el-menu-vertical > li.is-active:nth-child(3),
+    .el-menu-vertical > li:nth-child(3):hover {
+        &:before {
+            background-image: url('../../images/router-icon-ck.svg');
+        }
+    }
+
+    // 组件管理
+    .el-menu-vertical > li:nth-child(4):before {
+        background-image: url('../../images/group-icon.svg');
+    }
+
+    .el-menu-vertical > li.is-active:nth-child(4),
+    .el-menu-vertical > li:nth-child(4):hover {
+        &:before {
+            background-image: url('../../images/group-icon-ck.svg');
+        }
+    }
+
+    // 网关监控
+    .el-menu-vertical > li:nth-child(5):before {
+        background-image: url('../../images/monitor-icon.svg');
+    }
+    .el-menu-vertical > li.is-active:nth-child(5),
+    .el-menu-vertical > li:nth-child(5):hover {
+        &:before {
+            background-image: url('../../images/monitor-icon-ck.svg');
+        }
+    }
+
+    // 日志
+    .el-menu-vertical > li:nth-child(6):before {
+        background-image: url('../../images/log-icon.svg');
+    }
+
+    .el-menu-vertical > li.is-active:nth-child(6),
+    .el-menu-vertical > li:nth-child(6):hover {
+        &:before {
+            background-image: url('../../images/log-icon-ck.svg');
+        }
+    }
+
+    // 熔断管理
+    .el-menu-vertical > li:nth-child(7):before {
+        background-image: url('../../images/rong-duan-icon.svg');
+    }
+    .el-menu-vertical > li.is-active:nth-child(7),
+    .el-menu-vertical > li:nth-child(7):hover {
+        &:before {
+            background-image: url('../../images/rong-duan-icon-ck.svg');
+        }
+    }
+
+    .el-menu-vertical > li:nth-child(8):before {
+      background-image: url('../../images/eureka.svg');
+    }
+    .el-menu-vertical > li.is-active:nth-child(8),
+    .el-menu-vertical > li:nth-child(8):hover {
+      &:before {
+          background-image: url('../../images/eureka-ck.svg');
+      }
+    }
+
+    // 路由联通性测试 
+    .el-menu-vertical > li:nth-child(9):before {
+        background-image: url('../../images/router-connecte-icon.svg');
+    }
+    .el-menu-vertical > li.is-active:nth-child(9),
+    .el-menu-vertical > li:nth-child(9):hover {
+        &:before {
+            background-image: url('../../images/router-connecte-icon-ck.svg');
+        }
+    }
+
+    // 网关Swagger
+    .el-menu-vertical > li:nth-child(10):before {
+      background-image: url('../../images/swagger-icon.svg');
+    }
+    .el-menu-vertical > li.is-active:nth-child(10),
+    .el-menu-vertical > li:nth-child(10):hover {
+      &:before {
+          background-image: url('../../images/swagger-icon-ck.svg');
+      }
+    }
+
+    // 系统黑名单
+    .el-menu-vertical > li:nth-child(11):before {
+        background-image: url('../../images/system-icon.svg');
+    }
+
+    .el-menu-vertical > li.is-active:nth-child(11),
+    .el-menu-vertical > li:nth-child(11):hover {
+        &:before {
+            background-image: url('../../images/system-icon-ck.svg');
+        }
+    }
+
+    .el-menu-vertical > li:nth-child(13):before {
+      background-image: url('../../images/set-up-icon.svg');
+    }
+    
+    .el-menu-vertical > li:nth-child(12):before {
+        background-image: url('../../images/shen-ji-icon.svg');
+    }
+    .el-menu-vertical > li.is-active:nth-child(12),
+    .el-menu-vertical > li:nth-child(12):hover {
+        &:before {
+            background-image: url('../../images/shen-ji-icon-ck.svg');
+        }
+    }
+    
+    .el-menu-vertical > li.is-active:nth-child(13),
+    .el-menu-vertical > li:nth-child(13):hover {
+      &:before {
+          background-image: url('../../images/set-up-icon-ck.svg');
+      }
+    }
+    .el-submenu__title.is-active,
+    .el-menu-vertical > li:nth-child(3) > .el-submenu__title:hover {
+        background-image: url('../../images/set-up-icon.svg');
+    }
+
+}

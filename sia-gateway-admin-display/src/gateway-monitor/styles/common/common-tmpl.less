@@ -1,0 +1,82 @@
+.mask-task-list-manage{
+    z-index: 2000;
+    background-color: rgba(46,49,62,0.63);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    .mask-content{
+      width: 670px;
+      margin: 0 auto;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #373C4F;
+      box-shadow: 6px 9px 17px 0 rgba(22,21,21,0.45);
+      border-radius: 1px;
+      // padding: 25px;
+        .mask-main-title{
+          padding: 20px 15px 0 20px;
+          font-size: 16px;
+          color: #fff;
+          overflow: hidden;
+          border-radius: 2px 2px 0 0;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          text-align: left;
+            .close-icon {
+              width: 24px;
+              height: 24px;
+              float: right;
+              background: url('../../../common/images/close.png') no-repeat;
+              cursor: pointer;
+          }
+        }
+        .info {
+          color: #fff;
+          width: 100%;
+          height: 450px;
+          margin: 25px auto 10px;
+          overflow-y: auto;
+          p{
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+            // height: 40px;
+            line-height: 30px;
+            span{
+              &:nth-child(1){
+                color: #C1C5CF;
+                width: 160px;
+                text-align: right;
+                margin-right: 15px;
+              }
+              &:nth-child(2){
+                flex: 1;
+                word-break: break-all;
+                height: auto;
+                i {
+                  display: block;
+                  font-style: normal;
+                  em {
+                    font-style: normal;
+                    &:nth-child(1) {
+                      color: #C1C5CF;
+                      display: inline-block;
+                      width: 100px;
+                      text-align: right;
+                    }
+                    &:nth-child(2) {
+                      margin-left: 10px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    }
+}
+  
