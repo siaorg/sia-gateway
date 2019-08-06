@@ -1,0 +1,43 @@
+{
+  "msg": {
+    "type": "text",
+    "analyzer": "standard"
+  },
+  "instanceid": {
+    "type": "keyword"
+  },
+  "appname": {
+    "type": "keyword"
+  },
+  "level": {
+    "type": "keyword"
+  },
+  "logtime": {
+    "type": "date",
+    "fields": {
+      "long": {
+        "type": "long"
+      }
+    }
+  },
+  "loggername": {
+    "type": "keyword"
+  },
+  "threadname": {
+    "type": "keyword"
+  },
+  "routeid": {
+    "type": "keyword"
+  },
+  "uri": {
+    "type": "keyword"
+  },
+  "parameter": {
+    "type": "text",
+    "analyzer": "standard"
+  },
+  "body": {
+    "type": "text",
+    "analyzer": "standard"
+  }
+}

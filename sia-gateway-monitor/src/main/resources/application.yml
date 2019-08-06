@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: API-GATEWAY-MONITOR
+
+server:
+  port: 8040
+
+
+logging.file: ../logs/${spring.application.name}.log
+
+eureka.client.serviceUrl.defaultZone: http://127.0.0.1:19002/eureka/
+eureka.instance.preferIpAddress: true
+eureka.instance.instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+management.security.enabled: false
+#turbine:
+#  appConfig: GANTRY-GATEWAY-CORE,SMP-GATEWAY-CORE
+#  aggregator:
+#    clusterConfig: GANTRY-GATEWAY-CORE,SMP-GATEWAY-CORE
+  # 表示集群的名字为default,当服务数量非常多的时候,可以启动多个Turbine服务来构建不同的聚合集群
+#  clusterNameExpression: metadata['default']
+#  # 表示同一主机上的服务通过host和port的组合来进行区分，默认情况下是使用host来区分，这样会使本地调试有问题
+#  # combine-host-port: true
+#turbine.InstanceMonitor.eventStream.skipLineLogic.enabled: false
+
+# # spring boot 2.x以上版本需要加此配置
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"

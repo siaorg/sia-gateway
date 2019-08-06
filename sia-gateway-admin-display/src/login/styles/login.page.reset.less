@@ -1,0 +1,67 @@
+body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: absolute;
+  font-size: 14px;
+  overflow: hidden;
+  #app {
+    height: 100%;
+    font-family:  "Helvetica Neue","Helvetica","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Arial","sans-serif";
+  }
+}
+
+.login {
+  .login-form {
+    margin-top: 40px;
+    // 错误提示信息
+    .el-form-item__error {
+      margin-left: 5px;
+    }
+    .el-input {
+      display: flex;
+      align-items: center;
+      height: 35px;
+      border-bottom: 1px solid #646971;
+      .el-input__inner {
+        color: #fff;
+        padding: 0 5px;
+        border-width: 0;
+        background: transparent;
+      }
+    }
+    .el-form-item__label, .el-checkbox__label {
+      color: #fff;
+    }
+    .is-admin {
+      height: 30px;
+    }
+  }
+}
+#app {
+  .login-form {
+    // input、select、textarea校验成功之后的边框颜色
+    .el-form-item.is-success .el-input__inner,
+    .el-input__inner:focus, .el-input__inner:hover, {
+      background: transparent;
+      border-color: transparent;
+    }
+    // input、select、textarea校验失败的边框颜色
+    .el-form-item.is-error .el-input__inner {
+      background: transparent;
+      border-color: transparent;
+    }
+    .is-disabled .el-input__inner {
+      background: transparent;
+      border-color: transparent;
+      cursor: not-allowed;
+    }
+    .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+      background-color: #38E0B9;
+      border-color: #38E0B9;
+    }
+  }
+}

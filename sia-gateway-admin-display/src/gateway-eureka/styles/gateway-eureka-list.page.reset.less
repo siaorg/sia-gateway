@@ -1,0 +1,28 @@
+.el-popper.tooltip::-webkit-scrollbar {width:10px; height:10px; background-color:transparent;} /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+.el-popper.tooltip::-webkit-scrollbar-track {background-color:#292D40; -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);} /*定义滚动条轨道 内阴影+圆角*/
+.el-popper.tooltip::-webkit-scrollbar-thumb {background-color:#4B5061; -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);} /*定义滑块 内阴影+圆角*/
+.el-popover.el-popper.tooltip {
+  border: 1px solid #242731;
+  border-radius: 2px;
+  background: #2E313E;
+  color: #fff;
+  cursor: pointer;
+  height: 200px;
+  overflow-y: auto;
+  .tooltip-box {
+    // width: 570px;
+    p{
+      height: 35px;
+      line-height: 35px;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid rgba(193, 197, 207, 0.15);
+      &:nth-child(1) {
+        border-top-width: 0;
+      }
+    }
+  }
+}
+#app .gateway-eureka-list-page .is-disabled .el-input__inner{
+  height: 32px;
+}

@@ -1,0 +1,54 @@
+@import '../../common/styles/global.less';
+.desktop-page {
+  .gateway-group:hover,.gateway-group.active{
+    color: #fff;
+    border-radius: 3px;
+    background: #60BECA;
+    h3 {
+      color: #fff;
+    }
+    ul {
+        li {
+          span {
+            color: #fff;
+          }
+        }
+    }
+  }
+  .gateway-group {
+    width: 300px;
+    height: 205px;
+    margin: 0 15px 15px 0;
+    padding: 17px;
+    border-radius: 3px;
+    float: left;
+    background: #373C4F;
+    cursor: pointer;
+    h3 {
+      margin: 0;
+      height: 50px;
+      color: #60BECA; // 标题字体颜色
+    }
+    ul {
+      li {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+        span {
+          font-size: 14px;
+          &:nth-child(1) {
+            color: #C1C5CF;
+            width: 78px;
+            display: inline-block;
+          }
+          &:nth-child(2){
+            flex: 1;
+            word-break: break-all;
+            height: auto;
+            color: #FDFDFD;
+          }
+        }
+      }
+    }
+  }
+}

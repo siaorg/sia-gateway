@@ -1,0 +1,143 @@
+.gateway-monitor-page{
+    &>.section-container {
+      .task-manage-table{
+        .el-table__body-wrapper{
+          height: calc(~"100% - 55px");
+          overflow-y: auto;
+        }
+      }
+        .jsPlumbBox {
+          width: 100%;
+          height: calc(~'100% - 50px');
+          position: relative;
+          overflow: auto;
+          .jsPlumbIcon{
+            .mark-box {
+              position: absolute;
+              display: none;
+              left: 0;
+              top: calc(~ '-50%');
+              transform: translateY(-100%);
+              background: #2E313E;
+              border-radius: 4px;
+              border: #373C50 1px solid;
+              z-index: 20;
+              em {
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                font-size: 0;
+                line-height: 0;
+                border-width: 8px;
+                border-style: solid dashed dashed dashed;
+                border-color: #2E313E transparent transparent transparent;
+                position: absolute;
+                bottom: -16px;
+              }
+            }
+            .bottom-tip.mark-box {
+              left: 0;
+              top: 400%;
+              em {
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                font-size: 0;
+                line-height: 0;
+                border-width: 8px;
+                border-style: solid dashed dashed dashed;
+                border-color: transparent transparent #2E313E transparent ;
+                position: absolute;
+                top: -15px;
+              }
+            }
+            p.mark-box {
+              padding: 5px 10px;
+              margin: 0;
+              width: 250px;
+              span {
+                display: flex;
+                flex-wrap: wrap;
+                line-height: 20px;
+                i {
+                  font-style: normal;
+                  &:nth-child(1) {
+                    // width: 90px;
+                  }
+                  &:nth-child(2) {
+                    margin-left: 5px;
+                    flex: 1;
+                    word-break: break-all;
+                  }
+                }
+              }
+            }
+          }
+          .jsPlumbIcon:hover {
+            p.mark-box {
+              display: block;
+            }
+          }
+          .jsPlumbIcon, h5 {
+            line-height: 15px;
+            position: absolute;
+            display: inline-block;
+            left: 0;
+            top: 0;
+            border-radius: 16px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 400;
+            text-align: left;
+            margin: 0;
+            padding-left: 30px;
+            width: 180px;
+            height: 32px;
+            line-height: 32px;
+            cursor: pointer;
+          }
+          h5 {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+          .jsPlumbIcon.apply {
+            background: rgba(96,190,202,0.33) url('../../../static/img/apply.png') no-repeat 3px 2px;
+            border: 1px solid #60BECA;
+          }
+          .jsPlumbIcon.browser {
+            background: rgba(0,156,225,0.32) url('../../../static/img/browser.png') no-repeat 3px 2px;
+            border: 1px solid #009CE1;
+          }
+          .jsPlumbIcon.router {
+            background: rgba(144,19,254,0.21) url('../../../static/img/router.png') no-repeat 3px 2px;
+            border: 1px solid #BA79F3;
+          }
+          .jsPlumbIcon.group {
+            background: rgba(245,166,35,0.10) url('../../../static/img/group.png') no-repeat 3px 2px;
+            border: 1px solid #F5A623;
+          }
+          // .box_1 {
+          //   background: #60BECA;
+          // }
+          // .box_2 {
+          //   background: #825DD7;
+          // }
+          // .box_3 {
+          //   background: #4A90E2;
+          // }
+          // .box_4 {
+          //   background: #B8E986;
+          // }
+          // .box_5 {
+          //   background: #ED6E7E;
+          // }
+          // .box_6 {
+          //   background: #1890FF;
+          // }
+          // .box_7 {
+          //   background: #E8A010;
+          // }
+        }
+    }
+}

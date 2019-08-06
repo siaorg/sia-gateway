@@ -1,0 +1,48 @@
+########################################################
+###  ZUUL 辅助服务
+########################################################
+spring.application.name: DEV-GATEWAY-SERVICE
+eureka.client.serviceUrl.defaultZone: http://127.0.0.1:19002/eureka/
+eureka.instance.preferIpAddress: true
+eureka.instance.instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+server.port: 8070
+
+# ZUUL actuator功能
+management.security.enabled: false
+
+########################################################
+###  数据库 mysql基本配置；
+########################################################
+spring.datasource.skytrain:
+  url: jdbc:mysql://127.0.0.1:3306/zoner?characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false
+  username: root
+  password: ####
+  driverClassName: com.mysql.jdbc.Driver
+
+########################################################
+###  KAFKA 基本配置
+########################################################
+spring.kafka.bootstrap-servers: 127.0.0.1:9092
+# 生产者和消费者topic前缀
+spring.kafka.topicPrefix: sag.
+
+spring.kafka.producer.numOfPartition: 4
+spring.kafka.producer.retries: 2
+# 每次批量发送消息的数量
+spring.kafka.producer.batch-size: 16384
+spring.kafka.producer.buffer-memory: 33554432
+
+#是否开启Debug功能
+zuul.debug.enabled: true
+
+logging.file: ../logs/${spring.application.name}.log
+
+
+
+# 网关预警服务邮箱接口
+SKYTRAIN_DEFAULT_EMAIL: sia.list@someone.cn
+ALARM_EMAIL_SERVICEID: GANTRY-EMAIL-ALARM
+ALARM_MAX_COUNT: 1
+
+# 网关预警服务邮箱接口
+ALARM_EMAIL_ADDRESS: ## http://127.0.0.1:8070/alarmEmail/sendAlarmEmail

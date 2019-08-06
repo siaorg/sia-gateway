@@ -1,0 +1,74 @@
+@import "../../common/styles/global";
+.login {
+  height: 100%;
+  width: 100%;
+  background: url('../images/login-bg.jpg');
+  background-size: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  .login-box {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    height: 550px;
+    width: 500px;
+    border-radius: 8px;
+    background: #2D3A46;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.6);
+    padding: 80px 40px 0;
+    .title {
+      text-align: center;
+      span {
+        display: block;
+        &:nth-child(1) {
+          width: 80px;
+          height: 80px;
+          margin: 0 auto;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        &:nth-child(2) {
+          margin-top: 15px;
+          font-size: 16px;
+        }
+      }
+    }
+    .login-form {
+      .el-input > .el-input__inner {
+        border-width: 0;
+      }
+      .el-form-item {
+        margin-bottom: 30px;
+        box-sizing: border-box;
+      }
+      .submit-form {
+        margin-top: 20px;
+        height: 60px;
+        .el-form-item__content {
+          width: 100%;
+          height: 60px;
+        }
+      }
+    }
+  }
+}
+#app {
+  .el-button.submit {
+    font-size: 18px;
+    width: 100%;
+    height: 60px;
+    background: #38E0B9;
+    border-width: 0;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 600;
+  }
+  .submit.el-button:hover, .submit.el-button.is-fouse {
+    color: #fff;
+    background: #299EAF;
+    border-color: #299EAF;
+  }
+}

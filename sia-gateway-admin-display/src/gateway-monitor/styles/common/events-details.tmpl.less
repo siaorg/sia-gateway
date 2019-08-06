@@ -1,0 +1,96 @@
+.events-details{
+    z-index: 2000;
+    background-color: rgba(46,49,62,0.63);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    .mask-content{
+      width: 670px;
+      margin: 0 auto;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #373C4F;
+      box-shadow: 6px 9px 17px 0 rgba(22,21,21,0.45);
+      border-radius: 1px;
+      // padding: 25px;
+        .mask-main-title{
+          padding: 20px 15px 0 20px;
+          font-size: 16px;
+          color: #fff;
+          overflow: hidden;
+          border-radius: 2px 2px 0 0;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          text-align: left;
+            .close-icon {
+              width: 24px;
+              height: 24px;
+              float: right;
+              background: url('../../../common/images/close.png') no-repeat;
+              cursor: pointer;
+          }
+        }
+        .info {
+          color: #fff;
+          width: 100%;
+          height: 450px;
+          padding: 0 20px;
+          margin: 25px auto 10px;
+          overflow-y: auto;
+          .introude {
+            margin-bottom: 10px;
+            margin-right: 10px;
+            border: 1px solid rgba(245,166,35,0.39);
+            border-radius: 2px;
+            font-size: 12px;
+            color: #F5A623;
+            height: 30px;
+            line-height: 30px;
+            // background: rgba(255,194,94,0.18) url('../../images/warnning.png') no-repeat 10px center;
+            background: rgba(255,194,94,0.18);
+            padding-left: 10px;
+
+          }
+          .third-group-list {
+            // height: calc(~'100% - 40px');
+            li {
+              display: flex;
+              flex-wrap: wrap;
+              align-items: center;
+              // margin-top: 10px;
+              // margin-right: 10px;
+              border-radius: 5px;
+              color: #666;
+              background: #313544;
+              border-radius: 1px;
+              // height: 55px;
+              padding: 6px 10px 10px 10px;
+              span {
+                font-size: 16px;
+                color: #C1C5CF;
+                vertical-align: middle;
+                &:nth-child(1) {
+                  margin-right: 10px;
+                }
+                &:nth-child(2) {
+                  flex: 1;
+                  line-height: 15px;
+                  word-break: break-all;
+                  height: auto;
+                  margin-top: 5px;
+                  font-size: 12px;
+                  color: #fff;
+                }
+              }
+            }
+            li:last-child{
+              margin-bottom: 10px;
+            }
+          }
+        }
+    }
+}
+  

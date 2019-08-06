@@ -1,0 +1,57 @@
+.run-static-page {
+  width: 100%;
+  height: calc(~"100% - 55px");
+  & > .section-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .section-content{
+      padding-top: 10px;
+      height: calc(~"100% - 65px");
+      overflow: auto;
+      .btn-box {
+        .el-button {
+          &:not(:nth-child(1)){
+            margin-left: 10px;
+          }
+        }
+        .upload-demo {
+          margin-left: 10px;
+          .el-button {
+            padding: 8px 16px;
+          }
+        }
+      }
+      .task-manage-table{
+        margin-top: 10px;
+        height: calc(~'100% - 65px');
+        .router-link {
+          color: #15D8E3;
+          cursor: pointer;
+          display: inline-block;
+          width: 100%;
+        }
+        .box-color {
+          display: flex;
+          flex-direction: column;
+          span {
+            &:nth-child(2) {
+              position: relative;
+              height: 5px;
+              width: 110px;
+              border-radius: 10px;
+              background: #ccc;
+              i {
+                position: absolute;
+                height: 5px;
+                top: 0;
+                left: 0px;
+                border-radius: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
