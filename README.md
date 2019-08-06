@@ -11,7 +11,9 @@
 
 &emsp;&emsp;把时间退回到二十年之前，当时企业级领域研发主要推崇的还是C/S模式，PB、Delphi这样的开发软件是企业应用开发的主流。随着时间不断的推移，标准化客户端模式的B/S架构开始渐渐流行了起来。初期，Web开发ASP还占据了不少优势，但JSP的预编译模式让性能有了很大的提升，因此JAVA变的越来越流行。
 
-&emsp;&emsp;那时候的软件架构基本都是单体架构，系统之间往往不需要进行交互，这也导致数据孤岛和ETL工具的发展。随着企业应用越来多，相互的关系也越来密切。应用之间也迫切需要进行实时交互访问，大家发现，几乎所有语言的系统都能够解析XML语言，因此SOA的概念被提了出来，web service开始流行。之后为了适应更加灵活的业务需求，简洁和清晰的层次结构使得 JSON 成为理想的数据交换语言，在SOA架构中企业服务中线技术ESB暴露的集中式架构的劣势让开发者明白基于注册和发现的分布式架构才是解决问题的关键办法。由此，微服务架构逐渐流行起来. 在《微服务设计》中如何界定一个微服务，就是使用松耦合&高内聚原则，把因相同因素变化的事情聚集在一起，把因不同因素变化的事情区隔开来。
+&emsp;&emsp;那时候的软件架构基本都是单体架构，系统之间往往不需要进行交互，这也导致数据孤岛和ETL工具的发展。随着企业应用越来多，相互的关系也越来密切。应用之间也迫切需要进行实时交互访问，大家发现，几乎所有语言的系统都能够解析XML语言，因此SOA的概念被提了出来，web service开始流行。之后为了适应更加灵活的业务需求，简洁和清晰的层次结构使得 JSON 成为理想的数据交换语言，在SOA架构中企业服务中线技术ESB暴露的集中式架构的劣势让开发者明白基于注册和发现的分布式架构才是解决问题的关键办法。由此，微服务架构逐渐流行起来。
+
+&emsp;&emsp;在《微服务设计》中如何界定一个微服务，就是使用松耦合&高内聚原则，把因相同因素变化的事情聚集在一起，把因不同因素变化的事情区隔开来。
 
 
 二. 微服务架构特性
@@ -48,7 +50,7 @@
 * 下图是一个典型的微服务架构，仅供参考
 
 <div align=center>
-<img src="docs/static_files/msa.png" width="500" height="300" />
+<img src="docs/static_files/msa.png"/>
 </div>
 
 
@@ -203,42 +205,42 @@ SIA-GateWay将架构的可扩展性作为重要的对外输出能力，第三方
 *  全局的集群状态查看和容器状态DashBoard统计
 
 <div align=center>
-<img src="docs/static_files/desktop.png" width="500" height="300" />
+<img src="docs/static_files/desktop.png"/>
 </div>
 
 
 *  实时的路由拓扑和网关拓扑调用关系及状态展示,实时的路由拓扑图如下：
 
 <div align=center>
-<img src="docs/static_files/routetop.png" width="500" height="300" />
+<img src="docs/static_files/routetop.png"/>
 </div>
 
 
 *   网关集群拓扑管理界面，包含实时日志，实时Hystix监控，JVM配置等
 
 <div align=center>
-<img src="docs/static_files/gatewaytop.png" width="500" height="300" />
+<img src="docs/static_files/gatewaytop.png"/>
 </div>
 
 
 *  可视化的组件管理界面：
 
 <div align=center>
-<img src="docs/static_files/compmgt.png" width="500" height="300" />
+<img src="docs/static_files/compmgt.png"/>
 </div>
 
 
 *  日志回溯及查看，利用EKK架构实现日志
 
 <div align=center>
-<img src="docs/static_files/es.png" width="500" height="300" />
+<img src="docs/static_files/es.png"/>
 </div>
 
 
 *  熔断管理的分类及错误Stacktrace查看
 
 <div align=center>
-<img src="docs/static_files/stacktrace.png" width="500" height="300" />
+<img src="docs/static_files/stacktrace.png"/>
 </div>
 
 
