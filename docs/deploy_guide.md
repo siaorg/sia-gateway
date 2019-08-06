@@ -318,7 +318,7 @@ sh start_gateway_test.sh
 	3. 下载centos基础镜像，如果已经下载，此步忽略。
 	4. 修改Dockerfile,FROM <font color='red'>镜像名 : 版本号</font>
 	
-    ![](/docs/static_files/conf12.png)
+![](/docs/static_files/conf12.png)
 
 	5. 配置yum源，如果部署机器能够使用阿里yum源，此步忽略。
 		+ 将yum源文件名称修改成 CentOS-Base.repo，并替换到/sia-gateway/third-libary/下
