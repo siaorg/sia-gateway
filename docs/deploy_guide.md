@@ -85,7 +85,7 @@ git clone https://github.com/siaorg/sia-gateway.git
 
 +  gateway\_admin_test.yml
 
-![](docs/static_files/conf1.png)
+![](/docs/static_files/conf1.png)
 ![](docs/static_files/conf2.png)
 
 +  gateway\_service_test.yml
