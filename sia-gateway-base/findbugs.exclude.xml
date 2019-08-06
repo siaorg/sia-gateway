@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<FindBugsFilter> 
+  <Match>
+       
+   		<Bug pattern="DM_BOXED_PRIMITIVE_FOR_COMPARE" />
+   </Match>
+  
+</FindBugsFilter>

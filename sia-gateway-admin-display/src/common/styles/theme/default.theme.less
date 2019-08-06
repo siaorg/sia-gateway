@@ -1,0 +1,217 @@
+@import './../global.less';
+
+.dispatch-system-default{
+  color: @default-font-color;
+  overflow: auto;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  // 路由搜索框下面盒子背景颜色
+  .bg-empty {
+    height: 10px;
+    background-color: @default-frame-background;
+  }
+  //全局默认 input  select公共样式
+  .el-input,.el-select{
+    .el-input__inner {
+      border-radius: 0px;
+      height: 35px;
+      line-height: 35px;
+      background: #2E313E;
+      border-color: #2E313E;
+      color: #C1C5CF;
+      font-size: 10px;
+    }
+    // 全局默认 input select placeholder字体大小、颜色公共样式
+    .el-input__inner::-webkit-input-placeholder {
+      color: #A9A9A9;
+      font-size: 12px;
+    }
+  }
+  // 多个按钮右对其
+  .btn-box {
+    display: flex;
+    justify-content: flex-end;
+    height: 30px;
+  }
+  // 单个按钮右对其
+  .btn-ml-auto {
+    margin-left: auto;
+  }
+  // 单选按钮  单选框颜色设置
+  .el-radio__input.is-checked .el-radio__inner {
+    background: #60BECA;
+    border-color: #60BECA;
+  }
+  // 单选按钮  label字体颜色设置
+  .el-radio__input.is-checked+.el-radio__label,.el-radio {
+    color: #fff;
+  }
+  // 多选框样式设置
+  .el-checkbox__inner {
+    border: 1px solid #C4C6CF;
+    border-radius: 3px;
+    background: transparent;
+  }
+  .is-focus.el-checkbox__input {
+    .el-checkbox__inner {
+      border: 1px solid #60BECA;
+    }
+  }
+  // 多选框选中样式设置
+  .is-checked.el-checkbox__input,.is-indeterminate.el-checkbox__input,{
+    .el-checkbox__inner {
+      background: #60BECA;
+      border: 1px solid #60BECA;
+    }
+  }
+  
+  // 穿梭框统一样式
+  .el-transfer {
+    .el-transfer-panel {
+      background: #313544;
+      border: 1px solid #313544;
+      // 头部颜色设置
+      .el-transfer-panel__header {
+        background: #464B5E;
+        border: 1px solid #464B5E;
+      }
+      // label绑定样式设置
+      .el-transfer-panel__item.el-checkbox,
+      .el-checkbox__input.is-checked+.el-checkbox__label {
+        color: #fff;
+      }
+    }
+    // 确定按钮样式设置
+    .el-transfer__button {
+      width: 38px;
+      height: 28px;
+      line-height: 28px;
+      background: #60BECA;
+      border: 1px solid rgba(0,0,0,0.00);
+      border-radius: 3px;
+      span {
+        position: relative;
+        top: -11px;
+      }
+    }
+    .el-transfer__button.is-disabled {
+      background: transparent;
+      border: 1px solid #E6E7EB;
+    }
+  }
+  // 字段描述图标样式
+  .instruction-icon{
+    margin: 2px 10px 0 10px;
+    font-size: 20px;
+    color: #F6A621;
+    cursor: pointer;
+  }
+  .frame-container {
+    background-color: @default-frame-background;
+    .dispatch-system-default{
+      padding: 15px;
+    }
+  }
+  .section-container {
+    width: 100%;
+    height: 100%;
+    background: @default-section-background;
+    .section-header {
+      padding: 0 15px;
+      min-height: 50px;
+      line-height: 50px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #2E313E;
+      .title {
+        font-size: 16px;
+      }
+      // 列表页面 搜索公共样式
+      .search-box {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 100%;
+        .search-list {
+          // 列表页面 input select公共样式
+          .el-input,.el-select{
+            .el-input__inner {
+              height: 32px;
+              line-height: 32px;
+              font-size: 10px;
+            }
+            // 列表页面 input select placeholder字体大小公共样式
+            .el-input__inner::-webkit-input-placeholder {
+              font-size: 10px;
+            }
+          }
+          span {
+            color: #C1C5CF;
+          }
+          .el-button.reset-btn {
+            span {
+              color: #60BECA;
+            }
+          }
+          .el-button.search-btn {
+            span {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+    .section-content::-webkit-scrollbar {width:10px; height:10px; background-color:transparent;} /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+    .section-content::-webkit-scrollbar-track {background-color:#292D40; -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);} /*定义滚动条轨道 内阴影+圆角*/
+    .section-content::-webkit-scrollbar-thumb {background-color:#4B5061; -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);} /*定义滑块 内阴影+圆角*/
+    .section-content {
+      padding: 0 15px;
+      height: calc(~"100% - 70px");
+      .el-form-item__label {
+        color: @default-font-color;
+        padding-right: 30px;
+        line-height: 35px;
+        height: 35px;
+        font-size: 12px;
+      }
+      .el-form-item__label:before {
+        position: relative;
+        top: 4px;
+      }
+    }
+    // table 样式
+    .el-table {
+      background: @default-table-background;
+      color: @default-table-font-color;
+      th.is-leaf {
+        background-color: @default-table-th-background;
+        color: @default-table-font-color;
+      }
+      tr:hover>td {
+        background: @default-table-th-background;
+      }
+      .el-table__body-wrapper {
+        height: calc(~'100% - 38px');
+        overflow-y: auto;
+      }
+      th {
+        padding: 6px 0;
+      }
+      tr > td {
+        padding: 7px 0;
+        background: @default-table-background;
+        border-bottom: 1px solid rgba(193,197,207,0.15);
+        a {
+          color: @default-table-font-color;
+          text-decoration: underline;
+        }
+        div.cell{
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow:ellipsis;
+        }
+      }
+    }
+  }
+}

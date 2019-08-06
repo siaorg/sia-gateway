@@ -1,0 +1,10 @@
+spring.application.name: API-GATEWAY-MONITOR
+eureka.client.serviceUrl.defaultZone: http://127.0.0.1:19002/eureka/,http://10.143.131.134:19002/eureka/
+eureka.instance.preferIpAddress: true
+eureka.instance.instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+server.port: 8040
+
+logging.file: ../logs/${spring.application.name}.log
+
+# ZUUL actuator功能
+management.security.enabled: false

@@ -1,0 +1,42 @@
+########################################################
+###  STREAM 负责日志服务
+########################################################
+spring.application.name: API-GATEWAY-STREAM
+eureka.client.serviceUrl.defaultZone: http://127.0.0.1:19002/eureka/
+eureka.instance.preferIpAddress: true
+eureka.instance.instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+server.port: 8050
+
+########################################################
+###  KAFKA 基本配置
+########################################################
+spring.kafka.bootstrap-servers: 127.0.0.1:9092
+# 生产者和消费者topic前缀
+spring.kafka.topicPrefix: sag.
+
+spring.kafka.consumer.group-id: test-consumer
+spring.kafka.consumer.auto-offset-reset: earliest
+spring.kafka.consumer.enable-auto-commit: true
+spring.kafka.consumer.auto-commit-interval: 100
+# 批量消费一次最多消费条数
+spring.kafka.consumer.max-poll-records: 100
+# 并发消费线程数
+spring.kafka.listener.concurrency: 2
+spring.kafka.listener.poll-timeout: 3000
+
+########################################################
+###  Sink 基本配置
+########################################################
+sink.esClusterName: gantrygateway
+sink.esAddr: 127.0.0.1:9300
+sink.esTemplateName: gantry_gateway_stream
+sink.esIndexPrefix: sag-
+sink.defaultRunnerEnable: true
+
+#是否开启Debug功能
+zuul.debug.enabled: true
+
+logging.file: ../logs/${spring.application.name}.log
+
+# ZUUL actuator功能
+management.security.enabled: false

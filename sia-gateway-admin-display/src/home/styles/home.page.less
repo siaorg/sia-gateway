@@ -1,0 +1,250 @@
+.scroll-warning::-webkit-scrollbar, .home-page::-webkit-scrollbar {width:8px; height:10px; background-color:transparent;} /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+.scroll-warning::-webkit-scrollbar-track, .home-page::-webkit-scrollbar-track {background-color:#292D40; -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);} /*定义滚动条轨道 内阴影+圆角*/
+.scroll-warning::-webkit-scrollbar-thumb, .home-page::-webkit-scrollbar-thumb {background-color:#4B5061; -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);} /*定义滑块 内阴影+圆角*/
+.home-page{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(~"100% - 55px");
+  .opera-statistics{
+    display: flex;
+    height: 140px;
+    min-height: 140px;
+    .statistics-list{
+      flex: 1;
+      // display: inline-block;
+      // width: 31.3%;
+      height: 140px;
+      border-radius: 5px;
+      span {
+        display: block;
+        text-align: center;
+        color: #fff;
+        &:nth-child(1) {
+          font-size: 45px;
+          font-weight: 600;
+          margin: 8px 0 2px 0;
+        }
+        &:nth-child(2) {
+          margin-bottom: 7px;
+          i {
+            font-style: normal;
+            font-size: 10px;
+            padding: 1px 8px;
+            background: rgba(255, 255, 255, 0.34);
+            border-radius: 8px;
+          }
+        }
+        &:nth-child(3){
+          width: 100%;
+          height: 15px;
+          margin: 5px 0 8px 0;
+          i {
+            display: block;
+            margin: 0 auto;
+            width: 65px;
+            height: 15px;
+            background: url('../images/wave-line.png') no-repeat center center;
+            background-size: contain;
+          }
+        }
+        &:last-child{
+          font-size: 13px;
+          opacity: 0.9;
+        }
+      }
+      &:nth-child(1){
+        background: url('../images/router-count.png') no-repeat;
+        background-size: 100% 100%;
+      }
+      &:nth-child(2){
+        background: url('../images/router-regiter.png') no-repeat;
+        background-size: 100% 100%;
+      }
+      &:nth-child(3){
+        background: url('../images/warn-count.png') no-repeat;
+        background-size: 100% 100%;
+      }
+    }
+    .statistics-list:not(:nth-child(1)){
+      margin-left: 20px;
+    }
+  }
+  h3 {
+    padding-left: 10px;
+    margin: 6px 0;
+    span {
+      color: #fff;
+      &:nth-child(1) {
+        display: inline-block;
+        width: 9px;
+        height: 9px;
+        background-image: linear-gradient(45deg, #645AFF 0%, #A573FF 100%);
+        border-radius: 100%;
+        margin-right: 8px;
+      }
+      &:nth-child(2) {
+        color: #fff;
+        font-size: 15px;
+      }
+    }
+  }
+  .run-status{
+    margin-top: 15px;
+    height: 370px;
+    .show-run-status{
+      display: flex;
+      .show-list{
+        height: 370px;
+        &:not(:nth-child(1)){
+          margin-left: 15px;
+          background: #373c4f;
+        }
+        &:not(:nth-child(3)){
+          flex: 4;
+          background: #373c4f;
+        }
+        &:nth-child(3){
+          flex: 3;
+          overflow: hidden;
+          background: #373c4f;
+          .scroll-warning{
+            height: calc(~'100% - 55px');
+            overflow-y: auto;
+          }
+          p{
+            color: #D0D4DC;
+            display: flex;
+            flex-direction: column;
+            min-width: 198px;
+            padding: 0 10px;
+            margin: 0;
+            span::before{
+              content: '';
+              display: inline-block;
+              width: 5px;
+              height: 5px;
+              background: #35D8A5;
+              border-radius: 100%;
+              margin: 3px 10px 0 0px;
+            }
+            span{
+              display: flex;
+              margin-top: 8px;
+              font-size: 14px;
+              padding-left: 10px;
+              i{
+                font-style: normal;
+                cursor: pointer;
+                &:not(:nth-child(3)){
+                  flex: 1;
+                  max-width: 215px;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                }
+                &:nth-child(3){
+                  padding: 1px 4px;
+                  background: #15D8E3;
+                  border-radius: 10px;
+                  font-size: 8px;
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .status-table{
+    display: flex;
+    margin-top: 15px;
+    overflow: hidden;
+    height: calc(~"100% - 455px");
+    min-height: 260px;
+    .table-list.max {
+      width: 600px;
+    }
+    // .table-list.flexs {
+    //   flex: 1;
+    // }
+    .table-list {
+      flex: 1;
+      height: calc(~'100% - 85px');
+      min-height: 260px;
+      background: #373C4F;
+      overflow-y: auto;
+      h3{
+        height: 40px;
+        padding: 0 0 0 10px;
+        margin: 0;
+        line-height: 40px;
+        span {
+          &:nth-child(1) {
+            background-image: linear-gradient(-135deg, #2DC9EB 0%, #14D2B8 100%);
+          }
+        }
+      }
+      .caozuo {
+        display: flex;
+        span {
+          flex: 1;
+          font-size: 10px;
+          color: #60BECA;
+          cursor: pointer;
+          &:last-child{
+            color: #676d82;
+          }
+        }
+      }
+      .echarts-list {
+        height: calc(~'100% - 40px');
+        min-height: calc(~'100% - 40px');
+        .chart-display {
+          height: 220px;
+          // display: flex;
+          width: 100%;
+          // min-width: 600px;
+          // width: 600px;
+          overflow-x: auto;
+          overflow-y: hidden;
+        }
+        .scroll-bars {
+          display: flex;
+          height: 200px;
+          width: auto;
+          min-width: 600px;
+          .echarts-box {
+            width: 200px;
+            height: 200px;
+          }
+        }
+        .monitor-list {
+          // height: calc(~'100% - 220px');
+          .el-radio-group {
+            height: 100%;
+          }
+        }
+      }
+      .gateway-status{
+        // height: calc(~'100% - 40px');
+        // min-height: 150px;
+        overflow: hidden;
+        padding: 0 15px 15px 15px;
+        .Running, .running{
+          font-size: 12px;
+          color: #35D8A5;
+        }
+        .Dead, .dead{
+          // font-weight: 600;
+          font-size: 12px;
+          color: #DD4F3F;
+        }
+      }
+      &:nth-child(1){
+        margin-right: 15px;
+      }
+    }
+  }
+}

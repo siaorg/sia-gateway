@@ -1,0 +1,159 @@
+@import './../global.less';
+.bread-crumb {
+  display: flex;
+  height: 55px;
+  background: #393e50;
+  // box-shadow: 0 5px 10px #ddd;
+  // border-bottom: 1px solid #ccc;
+  .current-gateway {
+    display: flex;
+    width: 210px;
+    height: 38px;
+    margin: 9px 3px 0 3px;
+    .gateway-icon {
+      width: 34px;
+      height: 34px;
+      margin: 2px 6px 2px 5px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .gateway-name {
+      display: flex;
+      flex-direction: column;
+      width: calc(~'100% - 41px');
+      height: 100%;
+      margin-top: 2px;
+      color: #fff;
+      span {
+        font-size: 12px;
+        margin-top: 2px;
+        height: 100%;
+        .curren-grounp {
+          display: flex;
+          flex-direction: column;
+          cursor: pointer;
+          color: #bec2cd;
+          span {
+            &:nth-child(1){
+              color: #7f8491;
+            }
+            &:nth-child(2) {
+              cursor: pointer;
+              text-overflow:ellipsis;
+              overflow:hidden;
+              white-space: nowrap;
+              color: #bec2cd;
+            }
+          }
+        }
+        
+      }
+    }
+  }
+  .frame-breadcrumb {
+    display: flex;
+    flex: 1;
+    height: 55px;
+    background: #393e50;
+    // border-bottom: 1px solid #ccc;
+    .left-icon {
+      margin-right: 5px;
+    }
+    .left-icon,.right-icon {
+      width: 30px;
+      text-align: center;
+      background: rgba(41,45,64,0.37);
+      border: 1px solid #292D40;
+      line-height: 55px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 900;
+      span {
+        color: #9B9B9B;
+      }
+    }
+    .right-icon {
+      margin-left: 10px;
+    }
+    .current-router {
+      padding: 0 5px;
+      margin-right: 18px;
+      height: 33px;
+      margin-top: 25px;
+      color: #60BECA;
+      border-image: url('../../images/nav-border.png') 0 30 30 30;
+      border-radius: 2px;
+
+    }
+    .bread-crumb-main {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      .bread-crumb-list::-webkit-scrollbar {
+          display: none
+      }
+      .bread-crumb-list {
+        position: absolute;
+        left: 0;
+        width: auto;
+        height: 50px;
+        transition: all 0.5s;
+        white-space: nowrap;
+        color: #999;
+        overflow-x: auto;
+        box-sizing: border-box;
+      }
+
+      .tags-li {
+        display: inline-block;
+        margin: 14px 5px 9px 3px;
+        border-radius: 3px;
+        font-size: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        height: 27px;
+        line-height: 26px;
+        border: 1px solid rgba(169,180,218,0.28);
+        // background: #fff;
+        vertical-align: middle;
+        color: #BDC1CB;
+        -webkit-transition: all 0.3s ease-in;
+        transition: all 0.3s ease-in;
+        // box-shadow: 1px 2px 8px #ddd;
+        a {
+          display: inline-block;
+          height: 100%;
+          color: #BDC1CB;
+          padding: 0 5px 0 20px;
+        }
+        span {
+          display: inline-block;
+          height: 100%;
+          width: 30px;
+          text-align: center;
+        }
+      }
+      .tags-li:not(.active):hover {
+        color: #FFFFFF;
+        background: rgba(169,180,218,0.28);
+      }
+      .tags-li.active {
+        background: rgba(169,180,218,0.28);
+        a,span {
+          color: #FFFFFF;
+        }
+      }
+    }
+  }
+}
+.logout-box.el-popover {
+  border: 1px solid #242731;
+  border-radius: 2px;
+  background: #2E313E;
+  cursor: pointer;
+  .logout-text {
+    color: #fff;
+  }
+}

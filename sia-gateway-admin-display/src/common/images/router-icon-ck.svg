@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="16px" viewBox="0 0 18 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>路由管理</title>
+    <desc>Created with Sketch.</desc>
+    <g id="网关" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="路由管理" transform="translate(-1.000000, -2.000000)">
+            <rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="20" height="20"></rect>
+            <polygon id="路径" fill="#60BECA" points="6.875 8.5 13.125 8.5 13.125 9.4375 6.875 9.4375"></polygon>
+            <path d="M17.5,8.5 L15.625,8.5 L15.625,9.4375 L16.875,9.4375 L17.4375,10.875 L15,10.875 L15,2.8125 L13.75,2.8125 L13.75,10.875 L6.25,10.875 L6.25,2.8125 L5,2.8125 L5,10.875 L2.5625,10.875 L3.125,9.4375 L4.375,9.4375 L4.375,8.5 L2.5625,8.5 L1.25,10.875 L1.25,17.25 L18.75,17.25 L18.75,10.875 L17.5,8.5 Z M17.5,15.9375 L2.5,15.9375 L2.5,12.1875 L17.5,12.1875 L17.5,15.9375 Z" id="形状" fill="#60BECA" fill-rule="nonzero"></path>
+            <path d="M15,13.4375 L16.25,13.4375 L16.25,14.6875 L15,14.6875 L15,13.4375 Z M12.5,13.4375 L13.75,13.4375 L13.75,14.6875 L12.5,14.6875 L12.5,13.4375 Z M10,13.4375 L11.25,13.4375 L11.25,14.6875 L10,14.6875 L10,13.4375 Z" id="形状" fill="#60BECA" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>
