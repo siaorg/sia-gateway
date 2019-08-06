@@ -99,7 +99,7 @@
 * Admin是网关集群的管理后台，由Admin、Service、Stream、Monitor等服务组成。
 
 <div align=center>
-<img src="docs/static_files/ark.png" width="500" height="300" />
+<img src="docs/static_files/ark.png"/>
 </div>
 
 
@@ -108,7 +108,7 @@
 
 
 <div align=center>
-<img src="docs/static_files/deploy.png" width="500" height="300" />
+<img src="docs/static_files/deploy.png"/>
 </div>
 
 面向业务系统的微服务网关
@@ -141,7 +141,7 @@
 
 
 <div align=center>
-<img src="docs/static_files/dis.png" width="500" height="300" />
+<img src="docs/static_files/dis.png"/>
 </div>
 
 
@@ -248,7 +248,7 @@ SIA-GateWay将架构的可扩展性作为重要的对外输出能力，第三方
 延迟统计，调用计数等指标。
 
 <div align=center>
-<img src="docs/static_files/url.png" width="500" height="300" />
+<img src="docs/static_files/url.png"/>
 </div>
 
 
