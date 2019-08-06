@@ -6,11 +6,11 @@ SIA-GATEWAY(简称SAG) 是基于SpringCloud微服务生态体系下开发的一�
 
 下图是网关的整体架构图：
 
-![](docs/article/ark.png)
+![](/docs/article/ark.png)
 
 下图是网关的整体部署架构图：
 
-![](docs/article/deploy.png)
+![](/docs/article/deploy.png)
 
 
 
@@ -31,7 +31,7 @@ API网关系统是一个处于应用程序或服务（提供REST API接口服务
 
 API网关的一个很重要的作用就是可以将微服务的API聚合后提供一个统一的EntryPoint作为业务使用方的一个统一入口以及屏蔽和隐藏业务内部逻辑。
 
-![](docs/article/comp.png)
+![](/docs/article/comp.png)
 
 上面是SIA-GateWay提供的公共组件类型及分类。
 目前SIA-GateWay通过组件管理的机制实现了5个大类8个子类的公共服务组件供业务方使用， 其中提供的路由组件绑定机制可以让业务方灵活的决定是否要在运行时执行相关组件逻辑。
@@ -47,12 +47,12 @@ API网关的一个很重要的作用就是可以将微服务的API聚合后提�
 微服务架构的一个重要的特性就是去中心化的架构设计思路，SIA-GateWay在软件设计层面上增加了一个“网关组”的抽象概念，一个网关组对应就是一个独立的业务领域。网关组的概念也契合了微服务架构中的一些理念：业务系统依赖API网关提供明确清晰的服务边界；业务系统通过API网关对外暴露业务的标准服务接口。
 从实现层面， SIA-GateWay充分利用并结合了容器自动化的部署技术，在解决最后一公里的问题上，将网关以云端容器资源的方式交付给不同业务方，通过共享网关SDK部署包的方式将网关的服务下沉到容器中实现和执行，从而在时间和空间上做到了系统的弹性和灵活交付。同时中心化的管理能力又给使用网关的具有不同权限的用户可以同时维护各自所属网关组下的网关节点带来了便利。
 
-![](docs/article/gateway.png)
+![](/docs/article/gateway.png)
 
 上图展示的是SIA-GateWay去中心化的网关架构。当然除了API网关模式， 目前下一代微服务架构ServiceMesh技术也是典型的去中心化架构，ServiceMesh是从SideCar边车模式演进而来，是一种通过将服务治理能力下沉到业务节点的方式，通过控制面（control plane）和数据面（data plane）的处理解耦分离实现服务通信更加快速，便捷，智能。
  
 
-![](docs/article/servicemesh.png) 
+![](/docs/article/servicemesh.png) 
 
 
 然而目前来看， 从技术上及各大公司的实践中，ServiceMesh在落地上还存在诸多复杂性及不可控性，这种模式会给运维带来极大的成本，如果贸然使用会给本就复杂的分布式系统带来更多的复杂和难度。所以从目前来讲，GateWay网关的模式在组织粒度上可以调整，在实现方式上更加简单可控，是目前的微服务架构中比较适合采用的模式。
@@ -93,7 +93,7 @@ SIA-GateWay将架构的可扩展性作为重要的对外输出能力，第三方
 8. 组件管理器同步插件Plugin状态。
 下图是SIA-GateWay组件加载机制的执行逻辑图：
 
-![](docs/article/jar.png)
+![](/docs/article/jar.png)
 
 
 
@@ -106,34 +106,34 @@ SIA-GateWay将架构的可扩展性作为重要的对外输出能力，第三方
 俗话说流水的架构， 铁打的监控， 任何架构都需要软件监控。微服务应用本身RPC的交互方式和带来了对监控系统了解系统运行状态的难题。SIA-GateWay对微服务监控主要做了如下方面增强：
 *  全局的集群状态查看和容器状态DashBoard统计
 
-![](docs/article/desktop.png)
+![](/docs/article/desktop.png)
 
 *  实时的路由拓扑和网关拓扑调用关系及状态展示
 1.1实时的路由拓扑
 
-![](docs/article/routetop.png)
+![](/docs/article/routetop.png)
      
 
 1.2 网关集群拓扑管理界面，包含实时日志，实时Hystix监控，JVM配置等
 
-![](docs/article/gatewaytop.png)
+![](/docs/article/gatewaytop.png)
 
 *  可视化的组件管理界面：
 
-![](docs/article/compmgt.png)   
+![](/docs/article/compmgt.png)   
                    
 *  日志回溯及查看，利用EKK架构实现日志
 
-![](docs/article/es.png)   
+![](/docs/article/es.png)   
 
 *  熔断管理的分类及错误Stacktrace查看
 
-![](docs/article/stacktrace.png)   
+![](/docs/article/stacktrace.png)   
 
 *  URL细粒度的监控统计功能（默认不打开，需要路由绑定监控组件）,包括URL的  
 延迟统计，调用计数等指标。
 
-![](docs/article/url.png)   
+![](/docs/article/url.png)   
 
 
 

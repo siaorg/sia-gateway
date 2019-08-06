@@ -8,8 +8,7 @@ RUN  yum install -y gcc gcc-c++ glibc* automake autoconf libtool make libxml2-de
 
 # add third part
 ADD ./third-libary/  /opt/
-RUN /bin/bash -c 'rpm -ivh /opt/tcl-8.5.13-8.el7.x86_64.rpm;rpm -ivh /opt/tcl-devel-8.5.13-8.el7.x86_64.rpm;rm -rf /opt/tcl*;cd /opt/;useradd nginx -s /sbin/nologin;chown -R nginx.nginx /opt/nginx'
-# ENV LANG zh_CN.UTF-8
+RUN /bin/bash -c 'rpm -ivh /opt/tcl-8.5.13-8.el7.x86_64.rpm;rpm -ivh /opt/tcl-devel-8.5.13-8.el7.x86_64.rpm;rm -rf /opt/tcl*;cd /opt/;tar zxvf nginx.tar.gz;rm -rf nginx.tar.gz;useradd nginx -s /sbin/nologin;chown -R nginx.nginx /opt/nginx'
 ENV LC_ALL "zh_CN.UTF-8"
 
 # add admin server
