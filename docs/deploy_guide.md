@@ -85,29 +85,29 @@ git clone https://github.com/siaorg/sia-gateway.git
 
 +  gateway\_admin_test.yml
 
-![](docs/static_files/conf1.png)
-![](docs/static_files/conf2.png)
+![](/docs/static_files/conf1.png)
+![](/docs/static_files/conf2.png)
 
 +  gateway\_service_test.yml
 
-![](docs/static_files/conf4.png)
+![](/docs/static_files/conf4.png)
 
 +  gateway\_stream_test.yml 
-![](docs/static_files/conf5.png)
+![](/docs/static_files/conf5.png)
 
 +  gateway\_synchspeed_test.yml
 
-![](docs/static_files/conf3.png)
+![](/docs/static_files/conf3.png)
 
 +  gateway\_monitor_test.yml
 
-![](docs/static_files/conf6.png)
+![](/docs/static_files/conf6.png)
 
 +  gateway\_test.yml 
 
-![](docs/static_files/conf15.png)
-![](docs/static_files/conf16.png)
-![](docs/static_files/conf17.png)
+![](/docs/static_files/conf15.png)
+![](/docs/static_files/conf16.png)
+![](/docs/static_files/conf17.png)
 
 说明：spring.application.name为网关组名称，开发者可以修改此属性，搭建新的网关组
 
@@ -176,25 +176,25 @@ git clone https://github.com/siaorg/sia-gateway.git
 ```sh
 	cd sia-gateway
 	
-	chmod +x oneKeyBuildProject.sh
+	chmod +x *.sh
 	
-	sh oneKeyBuildProject.sh
+	sh build.sh
 ```
 
 + 打包成功后，会出现以下标注文件。
   + /sia-gateway/sia-gateway-admin-buildcomponent/target/gateway_admin_1.0.zip
   
-![](docs/static_files/conf7.png)
+![](/docs/static_files/conf7.png)
   
  
  + /sia-gateway/sia-gateway-buildcomponent/target/gateway_1.0.zip
  
-![](docs/static_files/conf8.png)
+![](/docs/static_files/conf8.png)
   
   
  + /sia-gateway/sia-gateway-admin-display/dist/
   
-![](docs/static_files/conf9.png)
+![](/docs/static_files/conf9.png)
 
 注：前端打包需要用到nodeJs,如未安装，可请参考 [nodejs安装文档](https://nodejs.org/zh-cn/download/)。
 #### 5.2 部署项目
@@ -235,7 +235,7 @@ sh start_gateway_test.sh
 
 	+  修改前端site-map.js
 	
-![](docs/static_files/conf11.png)
+![](/docs/static_files/conf11.png)
 	
 	+ nginx的代理配置，进入nginx的目录下nginx.conf，添加如下配置：
 	
@@ -288,41 +288,37 @@ sh start_gateway_test.sh
 	
 #### Docker 镜像方式部署
 
++ 说明：如果docker环境和编译环境是在同一个操作系统上，可直接执行以下步骤；反之，需要先将以下文件按原目录结构上传docker环境所在服务器。
+     + /sia-gateway/sia-gateway-admin-buildcomponent/target/gateway_admin_1.0.zip
+     + /sia-gateway/sia-gateway-buildcomponent/target/gateway_1.0.zip
+     + /sia-gateway/sia-gateway-admin-display/dist/
+     + /sia-gateway/third-libary
+     + /sia-gateway/build.sh
+     + /sia-gateway/docker-start.sh
+     + /sia-gateway/docker-run.sh
+     + /sia-gateway/Dockerfile
 + 步骤：
 
-	1. 将编译后sia-gateway工程打包并上传到docker环境所在的机器上，然后解压打包文件。
-	
-```sh
-		# 打包sia-gateway工程
-		tar zcvf siagateway.tar.gz ./sia-gateway
-		
-		# 上传文件到docker环境所在机器
-		
-		# 解压siagateway.tar.gz
-		tar zxvf siagateway.tar.gz
-		
-		#解压nginx压缩包
-		tar zxvf nginx.tar.gz
-```
-	2. 配置
+	1. 配置
 		+ 修改site-map.js，位置：/dist/static/site-map.js
 		
 ```js
-		/**
-	     *  宿主机ip
-	     */
-      'CESHI_API_HOST': '*****:18086/vv1',
-      
 	    /**
-	     * 配置kibana服务地址
-	     */
-     'CESHI_API_HOST_LOG': '******:5601'
+         * vmware部署： 127.0.0.1 ----> nginx的ip地址
+         * docker镜像部署： 127.0.0.1 ----> docker容器的宿主机ip
+         */
+        'CESHI_API_HOST': '127.0.0.1:18086/vv1',
+        
+        /**
+         * 127.0.0.1 ----> kibana的ip地址
+         */
+        'CESHI_API_HOST_LOG': '127.0.0.1:5601'
 ```
 		
 	3. 下载centos基础镜像，如果已经下载，此步忽略。
 	4. 修改Dockerfile,FROM <font color='red'>镜像名 : 版本号</font>
 	
-    ![](docs/static_files/conf12.png)
+    ![](/docs/static_files/conf12.png)
 
 	5. 配置yum源，如果部署机器能够使用阿里yum源，此步忽略。
 		+ 将yum源文件名称修改成 CentOS-Base.repo，并替换到/sia-gateway/third-libary/下
@@ -330,22 +326,22 @@ sh start_gateway_test.sh
 	
 ```sh
 	# 构建镜像
-	cd /sia-gateway/dockerBuild.sh 
+	cd /sia-gateway/ 
 	
 	# 授权
-	chmod +x dockerBuild.sh
+	chmod +x *.sh
 	
 	# 构建镜像
-	sh dockerBuild.sh
+	sh docker-build.sh
 	
 	# 启动容器和服务
-	sh launch.sh
+	sh docker-run.sh
 	
 	# 查看容器是否启动成功
 	docker ps 
 	
 	# 进入容器查看服务运行情况
-	
+	docker exec -it gateway-test:v1 bash
 
 ```
 	
@@ -353,9 +349,9 @@ sh start_gateway_test.sh
 	
 		
 	
-![](docs/static_files/conf13.png)
+![](/docs/static_files/conf13.png)
 	
-![](docs/static_files/conf14.png)
+![](/docs/static_files/conf14.png)
 	
 
 	

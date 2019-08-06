@@ -206,4 +206,4 @@ es索引模板配置文件只支持json文件，与application.yml在同级目�
 ```
 
 ### 4.6 EKK设计文档
-* EKK设计文档[ekk](docs/EKK-design.md)。
+* EKK设计文档[ekk](/docs/EKK-design.md)。

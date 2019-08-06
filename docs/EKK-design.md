@@ -160,7 +160,7 @@ Sink采用索引模板的方式设置索引，默认按月切索引。索引模�
 
 网关日志使用网关组名作为topic，Sink消费时默认根据topic将日志数据Elasticsearch的不同索引，所以每个网关组集群一个索引。Kibana自动跳转后展示的Index Pattern对应网关组日志索引数据，用户可通过应用名、ipport、日志级别、时间等字段精确查找日志。
 
-![](docs/static_files/Kibana.jpg)
+![](/docs/static_files/Kibana.jpg)
 
 ### 4.使用
 EKK使用参考网关开源项目中的`EKK使用指南`
