@@ -249,8 +249,11 @@ SIA-GateWay将架构的可扩展性作为重要的对外输出能力，第三方
 </div>
 
 
-## 相关文章：
-+ [微服务网关如何实现对服务下线的实时感知](https://mp.weixin.qq.com/s/f1LHALI3avVfnHyHTj-vuA)
+## SIA相关开源产品链接：
+
++ [微服务任务调度平台](https://github.com/siaorg/sia-task)
+
++ [Rabbitmq队列服务PLUS](https://github.com/siaorg/sia-rabbitmq-plus)
 
 
 ## 联系我们
