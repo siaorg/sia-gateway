@@ -359,6 +359,14 @@ sh start_gateway_test.sh
 **说明：**
 
 + Docker镜像部署方式是我们为方便开发者简单、快速地基于docker环境搭建网关系统而提供的一种ALL-IN-ONE形式的网关部署Demo，即网关监控服务、预警、网关核心节点等都构建在一个docker镜像中；开发者可以根据开发环境条件来灵活选择部署方案，推荐使用vmware+docker镜像部署方式，即将网关管理端服务部署在vmware上，网关核心节点部署在docker环境中。
++ Docker容器启动的时候，如果想要挂载宿主机的目录作为网关系统的配置文件，可通过以下方式启动：
+```sh
+# 该脚本默认挂载配置文件路径为：
+# 宿主机/sia-gateway/sia-gateway-admin-buildcomponent/config/
+# 宿主机/sia-gateway/sia-gateway-buildcomponent/config/
+sh docker-run.sh  v
+
+```
 
 	
 
