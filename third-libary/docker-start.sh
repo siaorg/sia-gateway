@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-/opt/nginx/sbin/nginx -c /opt/nginx/conf/nginx.conf
+nginx -tc /opt/nginx.conf && nginx -c /opt/nginx.conf
 
 cd /app/jar/ROOT/gatewayadmin/bin
 chmod +x *.sh 
