@@ -316,7 +316,7 @@ sh start_gateway_test.sh
 ```
 		
 	3. 下载centos基础镜像，如果已经下载，此步忽略。
-	4. 修改Dockerfile,内容："FROM 镜像名 : 版本号";centos版本为latest,此步忽略。
+	4. 修改Dockerfile,FROM 镜像名:版本号
 	
 ![](/docs/static_files/conf12.png)
 
