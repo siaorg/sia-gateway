@@ -316,7 +316,7 @@ sh start_gateway_test.sh
 ```
 		
 	3. 下载centos基础镜像，如果已经下载，此步忽略。
-	4. 修改Dockerfile,FROM <font color='red'>镜像名 : 版本号</font>
+	4. 修改Dockerfile,内容："FROM 镜像名 : 版本号";centos版本为latest,此步忽略。
 	
 ![](/docs/static_files/conf12.png)
 
@@ -367,6 +367,7 @@ sh start_gateway_test.sh
 sh docker-run.sh  v
 
 ```
++ 目前该套Docker镜像部署配置适用于linux、unix版本的docker环境中，对于window-docker环境可能会出现：编码问题、window路径找不到等问题；如果一定要运行在window版本docker环境中，开发人员需要自行解决这些问题。
 
 	
 
