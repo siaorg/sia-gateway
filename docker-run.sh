@@ -8,5 +8,5 @@ volums_path=""
 fi
 
 # -v /etc/localtime:/etc/localtime
-docker run --name gateway-test -it  ${volums_path}  -p 18086:18086 -p 8080:8080 -p 8040:8040  --restart=on-failure:10  --privileged=true reg.caiwu/sia/gateway:v1   /bin/bash -c " /app/jar/ROOT/docker-start.sh "
+docker run --name gateway-test -d  ${volums_path}  -p 18086:18086 -p 8080:8080 -p 8040:8040  --restart=on-failure:10  --privileged=true reg.caiwu/sia/gateway:v1   /bin/bash -c " /app/jar/ROOT/docker-start.sh "
 
