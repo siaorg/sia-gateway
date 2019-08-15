@@ -256,7 +256,7 @@ SIA-GateWay将架构的可扩展性作为重要的对外输出能力，第三方
 + [Rabbitmq队列服务PLUS](https://github.com/siaorg/sia-rabbitmq-plus)
 
 
-## 联系我们
+## 关于我们
 
 * 邮件交流：sia.list@creditease.cn
 
@@ -264,4 +264,6 @@ SIA-GateWay将架构的可扩展性作为重要的对外输出能力，第三方
 
 * 微信交流：
 
-    <img src="https://github.com/lijun006788/sia-task/blob/master/docs/images/siaopenWechatIMG3.jpeg" width="30%" height="30%">
+    <img src="docs/images/newlog.jpeg" width="30%" height="30%">
+    
+（待补充）
