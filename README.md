@@ -264,6 +264,6 @@ SIA-GateWay将架构的可扩展性作为重要的对外输出能力，第三方
 
 * 微信交流：
 
-    <img src="docs/images/newlog.jpeg" width="30%" height="30%">
+    <img src="docs/static_files/newlog.jpeg" width="30%" height="30%">
     
 （待补充）
