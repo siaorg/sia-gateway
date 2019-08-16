@@ -153,7 +153,7 @@ public class ApiGatewayAuditAspect {
 			gatewayAuditEvent.emit();
 
 		} catch (Throwable throwable) {
-			LOGGER.error(">>>>> An Throwable occurred in the audit recording...", throwable);
+			LOGGER.error("> An Throwable occurred in the audit recording...", throwable);
 		}
 		return resultObj;
 	}
@@ -198,7 +198,7 @@ public class ApiGatewayAuditAspect {
 			try {
 				bodyStr = JSON.toJSONString(args);
 			} catch (Exception e) {
-				LOGGER.error(">>> 解析post请求 body 体失败！", e);
+				LOGGER.error("> 解析post请求 body 体失败！", e);
 			}
 		}
 		params.append(bodyStr);

@@ -69,7 +69,7 @@ public class CompDbRepository extends BaseAdminRepository {
 
     private static final String UPDATE_RIBBON_MAP = "UPDATE gateway_ribbon_map SET currentVersion='%s' ,serviceid = '%s' where routeid='%s' ";
 
-    private static final String UPDATE_CANARY_RIBBON_MAP = "UPDATE gateway_ribbon_map SET context='%s' ,serviceid = '%s' where routeid='%s' ";
+    private static final String UPDATE_CANARY_RIBBON_MAP = "UPDATE gateway_ribbon_map SET context='%s' ,serviceid = '%s',strategy = '%s' where routeid='%s' ";
 
     private static final String QUERYROUTERATELIMIT = "select ratelimit from gateway_route_ratelimit where routeid='%s'";
 
@@ -340,11 +340,12 @@ public class CompDbRepository extends BaseAdminRepository {
      * 更新金丝雀配置
      *
      */
-    public boolean udpateCanaryRibbon(String serviceid, String routeId, String context) throws Exception {
+    public boolean udpateCanaryRibbon(String serviceid, String routeId, String context, String stretgy)
+            throws Exception {
 
         try {
 
-            String formatupdate = StringHelper.format(UPDATE_CANARY_RIBBON_MAP, context, serviceid, routeId);
+            String formatupdate = StringHelper.format(UPDATE_CANARY_RIBBON_MAP, context, serviceid, stretgy, routeId);
 
             adminJdbcTemplate.update(formatupdate);
 
