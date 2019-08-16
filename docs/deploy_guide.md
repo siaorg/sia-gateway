@@ -345,7 +345,7 @@ sh start_gateway_test.sh
 
 ```
 	
-访问地址：**http://宿主机IP:18086/**，具体使用可浏览[使用指南](docs/user_guide.md)。
+访问地址：http://宿主机IP:18086/ ，具体使用可浏览[使用指南](docs/user_guide.md)。
 	
 ![](/docs/static_files/conf13.png)
 	
