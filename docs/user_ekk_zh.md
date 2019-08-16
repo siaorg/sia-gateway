@@ -6,7 +6,7 @@ Elasticsearch是一个开源分布式搜索引擎，提供搜索、分析、存�
 Kibana设计用于和Elasticsearch一起工作，是一个开源的数据分析和可视化平台。
 
 EKK基于spring-kafka 1.1.8.RELEASE和elasticsearch-client transport 5.5.2封装，支持spring-kafka自动配置，并自定义了部分自动配置项，
-可根据自身需要修改配置。
+可根据自身需要修改配置。EKK设计可浏览[EKK设计](docs/EKK-design.md)。
 
 ## 一、Kafka生产者使用
 Kafka生产者使用分如下三步：
@@ -204,6 +204,3 @@ es索引模板配置文件只支持json文件，与application.yml在同级目�
   }
 }
 ```
-
-### 4.6 EKK设计文档
-* EKK设计文档[ekk](/docs/EKK-design.md)。

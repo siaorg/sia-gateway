@@ -13,8 +13,8 @@
 	+ redis 3.2.11
 	+ eureka-server
 + 运行环境
- + 64bit OS，Linux/Mac/Windows/docker
- + JDK1.8+
+   + 64bit OS，Linux/Mac/Windows/docker
+   + JDK1.8+
 
 
 ### 2、源码下载
@@ -345,9 +345,7 @@ sh start_gateway_test.sh
 
 ```
 	
-	访问地址： **http://宿主机IP:18086/**
-	
-		
+访问地址：**http://宿主机IP:18086/**，具体使用可浏览[使用指南](docs/user_guide.md)。
 	
 ![](/docs/static_files/conf13.png)
 	
