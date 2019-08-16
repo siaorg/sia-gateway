@@ -1,7 +1,7 @@
 # SIA GATEWAY| [中文](README.md) [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
 
 
-SAG is project provide an API Gateway built on top of the SpringCloud Ecosystem with the features of Simple,Easy Maintenance, Visualized,High Scalable,High availability.
+SIA-GateWay is project provide an API Gateway built on top of the SpringCloud Ecosystem with the features of Simple,Easy Maintenance, Visualized,High Scalable,High availability.
 
 
 ## Key Features
@@ -17,18 +17,18 @@ SAG is project provide an API Gateway built on top of the SpringCloud Ecosystem 
 * Plugin dynamic bind with route mechanism while providing load balancing, logging, authentication, rate-limiting, and more Customize plugins.
 
 ## Architecture
-SAG framework is composed by **CORE** and **Admin Cluster**：
+SIA-GateWay framework is composed by **CORE** and **Admin Cluster**：
 * CORE Cluster plays as the Realtime proxy Node , it is responsible for HTTP traffic processing and deploy distributed.
 * Admin Cluster plays as coordinator on Management side. it composed by Admin、Service、Stream、Monitor and deploy compacted。
 
 Below chart display CORE, Admin and MicroService relationShip:
 ![ServiceComb Pack 架构](docs/static_files/ark.png)
 
-Based on SAG Architecture, we have implements an EKK(ElasticSearch、Kafka、Kibana) Framework which provide message streaming processing middleware.
+Based on SIA-GateWay  Architecture, we have implements an EKK(ElasticSearch、Kafka、Kibana) Framework which provide message streaming processing middleware.
 [EKK Use Guide](docs/user_ekk_zh.md).
 
 ## User Guide
-How to use SAG [User Guide](docs/user_guide.md)。
+How to use SIA-GateWay  [User Guide](docs/user_guide.md)。
 
 ## Build Guide
 
@@ -44,9 +44,9 @@ How to use SAG [User Guide](docs/user_guide.md)。
 How it build and startup[ Deploy Guide](docs/deploy_guide.md)。
 
 ## Demo 
-* SAG Third party plugin [demo](docs/third_guide.md)。
-* SAG Auth-Client [demo](docs/safe_guide.md).
-* SAG Micro Service configuration guide[demo](docs/ms_guide.md)
+* SIA-GateWay Third party plugin [demo](docs/third_guide.md)。
+* SIA-GateWay Auth-Client [demo](docs/safe_guide.md).
+* SIA-GateWay Micro Service configuration guide[demo](docs/ms_guide.md)
 * EKK startup guide[demo](docs/user_ekk_zh.md).
 
 ## Contact Us

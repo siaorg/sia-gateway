@@ -314,5 +314,29 @@ public class DiscoveryService {
 
         return result;
     }
+    
+
+    public List<String> getServiceListByEurekaUrl(String eurekaUrls) {
+
+        String json = getServiceInstanceListV2(eurekaUrls);
+        if (StringHelper.isEmpty(json)) {
+            return Collections.emptyList();
+        }
+
+        List<String> instanceIdList = new LinkedList<>();
+        Map jsonMp = JsonHelper.toObject(json, Map.class);
+        List<Map> list = (List<Map>) ((Map) jsonMp.get("applications")).get("application");
+
+        for (Map application : list) {
+            List<Map> instances = (List<Map>) application.get("instance");
+            for (Map<String, String> instance : instances) {
+                String instanceId = instance.get("instanceId");
+
+                instanceIdList.add(instanceId);
+            }
+        }
+
+        return instanceIdList;
+    }
 
 }
