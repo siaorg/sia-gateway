@@ -19,6 +19,7 @@
  */
 
 
+
 package com.creditease.gateway.scheduler;
 
 import java.text.SimpleDateFormat;
@@ -29,6 +30,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,9 +74,9 @@ public class TopoLogyScheduledTask {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TopoLogyScheduledTask.class);
 
-    private Map<String, Map<String, RouteTopo>> topoAll = new HashMap<String, Map<String, RouteTopo>>();
+    private AtomicReference<Map<String, Map<String, RouteTopo>>> topoAll = new AtomicReference<>();
 
-    @Scheduled(cron = "0 0/5 * * * *")
+    @Scheduled(cron = "0 0/10 * * * *")
     public void statisticTopoTask() {
 
         LOGGER.info(">开始拓扑统计 ");
@@ -92,66 +94,86 @@ public class TopoLogyScheduledTask {
 
     public void statisticByZuulList(List<ZuulInfo> zuulist) {
 
-        LOGGER.info("statisticByZuulList start...");
+        try {
 
-        for (ZuulInfo zinfo : zuulist) {
-            String status = zinfo.getZuulStatus();
-            String instatnce = zinfo.getZuulInstanceId();
+            /**
+             * step1: 统计
+             */
+            Map<String, Map<String, RouteTopo>> topoTemp = new HashMap<String, Map<String, RouteTopo>>();
 
-            LOGGER.info("statisticByZuulList status:{}", status);
-            LOGGER.info("statisticByZuulList instatnce:{}", instatnce);
+            LOGGER.info("statisticByZuulList start...");
 
-            if (("Dead").equals(status)) {
-                LOGGER.info(">ZuulInstanceId:{},zinfo status is :", zinfo.getZuulInstanceId(), status);
-                continue;
-            }
-            String url = "http://" + instatnce;
-            String rst = null;
-            try {
+            for (ZuulInfo zinfo : zuulist) {
 
-                LOGGER.info("statisticTopoTask url:{}", url);
-                rst = handler.executeHttpGetCmd(url, GatewayConstant.ADMINOPTKEY.GTP.getValue());
+                String status = zinfo.getZuulStatus();
+                String instatnce = zinfo.getZuulInstanceId();
 
-                LOGGER.info(">>> remoteCall rst:" + rst);
+                LOGGER.info("statisticByZuulList status:{}", status);
+                LOGGER.info("statisticByZuulList instatnce:{}", instatnce);
 
-                if (StringHelper.isEmpty(rst)) {
-                    LOGGER.info("> rst is empty >");
+                if (("Dead").equals(status)) {
+                    LOGGER.info(">ZuulInstanceId:{},zinfo status is :", zinfo.getZuulInstanceId(), status);
                     continue;
                 }
+                String url = "http://" + instatnce;
+                String rst = null;
 
-                Map<String, Object> response = JsonHelper.toObject(rst, Map.class);
-                Map<String, String> reqeustValue = (Map<String, String>) response.get("request");
-                Map<String, Map> responseValue = (Map<String, Map>) response.get("response");
-                // transfer responseVlaue --> Map<String, RouteTopo>
-                Map<String, RouteTopo> transferTopo = new HashMap<String, RouteTopo>();
+                LOGGER.info("statisticTopoTask url:{}", url);
+                try {
+                    rst = handler.executeHttpGetCmd(url, GatewayConstant.ADMINOPTKEY.GTP.getValue());
 
-                LOGGER.info("> start transfer");
-                transfter(transferTopo, responseValue);
-                LOGGER.info("> end transfer");
-                String zuulgroupName = reqeustValue.get(GatewayConstant.GWGROUPNAME);
+                    LOGGER.info(">>> remoteCall rst:" + rst);
 
-                LOGGER.info(">  zuulgroupName >{}", zuulgroupName);
-
-                Map<String, RouteTopo> routeTopoMap = topoAll.get(zuulgroupName);
-                if (null == routeTopoMap) {
-                    // 第一级（网关组）不存在
-                    if (null != transferTopo) {
-                        topoAll.put(zuulgroupName, transferTopo);
+                    if (StringHelper.isEmpty(rst)) {
+                        LOGGER.info("> rst is empty >");
+                        continue;
                     }
-                    LOGGER.info("> start transferTopo:{}", transferTopo);
+
+                    Map<String, Object> response = JsonHelper.toObject(rst, Map.class);
+                    Map<String, String> reqeustValue = (Map<String, String>) response.get("request");
+                    Map<String, Map> responseValue = (Map<String, Map>) response.get("response");
+                    // transfer responseVlaue --> Map<String, RouteTopo>
+                    Map<String, RouteTopo> transferTopo = new HashMap<String, RouteTopo>();
+
+                    LOGGER.info("> start transfer");
+                    transfter(transferTopo, responseValue);
+                    LOGGER.info("> end transfer");
+                    String zuulgroupName = reqeustValue.get(GatewayConstant.GWGROUPNAME);
+
+                    LOGGER.info(">  zuulgroupName >{}", zuulgroupName);
+
+                    Map<String, RouteTopo> routeTopoMap = topoTemp.get(zuulgroupName);
+                    if (null == routeTopoMap) {
+                        // 第一级（网关组）不存在
+                        if (null != transferTopo) {
+                            topoTemp.put(zuulgroupName, transferTopo);
+                        }
+                        LOGGER.info("> start transferTopo:{}", transferTopo);
+                    }
+                    else {
+                        // 第二级（网关组下路由）合并
+                        LOGGER.info("> start merge");
+                        merge(routeTopoMap, transferTopo);
+                        LOGGER.info("> end merge");
+                    }
                 }
-                else {
-                    // 第二级（网关组下路由）合并
-                    LOGGER.info("> start merge");
-                    merge(routeTopoMap, transferTopo);
-                    LOGGER.info("> end merge");
+                catch (Exception e) {
+                    LOGGER.error("> Exception:{}", e);
                 }
+
             }
-            catch (Exception e) {
-                e.printStackTrace();
-                LOGGER.error(">>> get executeHttpCmd Exception:" + e.getMessage());
-            }
+
+            /**
+             * step2: 交换
+             * 
+             */
+            Swap(topoTemp);
+
             LOGGER.info(">>> remoteCall rst2 finish");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error(">>> get executeHttpCmd Exception:" + e.getMessage());
         }
     }
 
@@ -278,13 +300,18 @@ public class TopoLogyScheduledTask {
         }
     }
 
+    public void Swap(Map<String, Map<String, RouteTopo>> topoTemp) {
+
+        topoAll.set(topoTemp);
+    }
+
     public Map<String, Map<String, RouteTopo>> getTopoAll() {
 
-        return topoAll;
+        return this.topoAll.get();
     }
 
     public static void main(String args[]) {
 
-        System.out.println(new Date(Long.parseLong("1563773478719")));
+        System.out.println(new Date(Long.parseLong("1564664336526")));
     }
 }
