@@ -131,9 +131,9 @@ public class LogDataCollector extends BaseDataCollector {
         this.indexPrefix = indexPrefix;
     }
 
-    public void setExecutor(int corePoolSize, int maximumPoolSize, int blockingQueueSize) {
+    public void setExecutor(int nThreads, int blockingQueueSize) {
 
-        this.executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, 30, TimeUnit.SECONDS,
+        this.executor = new ThreadPoolExecutor(nThreads, nThreads, 0, TimeUnit.SECONDS,
                 new ArrayBlockingQueue(blockingQueueSize), new ThreadPoolExecutor.CallerRunsPolicy());
     }
 
