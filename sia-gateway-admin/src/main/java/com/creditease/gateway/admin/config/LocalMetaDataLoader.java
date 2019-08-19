@@ -25,6 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,6 +55,8 @@ public class LocalMetaDataLoader implements CommandLineRunner {
     @Autowired
     private CompDbRepository compdbrepository;
 
+    public static Set<String> publicfilterSet = null;
+
     @Override
     public void run(String... args) {
 
@@ -66,6 +69,8 @@ public class LocalMetaDataLoader implements CommandLineRunner {
             Map<String, Map<String, Object>> mapping = JsonHelper.toObject(jsonString, Map.class);
 
             compdbrepository.udpateCompDesc(mapping);
+
+            publicfilterSet =  mapping.keySet();
 
         }
         catch (Exception e) {

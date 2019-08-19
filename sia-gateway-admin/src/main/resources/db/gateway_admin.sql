@@ -226,3 +226,5 @@ INSERT INTO `gateway_component` (`id`,`compName`,`compFilterName`,`compType`,`co
 ALTER TABLE gateway_counter ADD INDEX instanceIndex (`zuulInstance`);
 ALTER TABLE gateway_counter ADD INDEX groupNameIndex (`zuulGroupName`);
 
+alter table gateway_component  modify column routeidList text;
+
