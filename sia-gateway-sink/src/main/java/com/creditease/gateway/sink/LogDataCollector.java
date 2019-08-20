@@ -70,7 +70,7 @@ public class LogDataCollector extends BaseDataCollector {
             List<Map<String, Object>> list = new LinkedList<>();
 
             for (String json : entry.getValue()) {
-                Map map = jsonToMap(entry.getKey(), json);
+                Map map = jsonToMap(json);
                 if (map != null) {
                     list.add(map);
                 }
@@ -83,7 +83,7 @@ public class LogDataCollector extends BaseDataCollector {
     @Override
     public void sinkToSource(String index, String json) {
 
-        Map map = jsonToMap(index, json);
+        Map map = jsonToMap(json);
         if (map != null) {
             insertToEs(index, map);
         }
@@ -145,7 +145,7 @@ public class LogDataCollector extends BaseDataCollector {
         bulkRequest.add(irb);
     }
 
-    private Map<String, Object> jsonToMap(String index, String json) {
+    private Map<String, Object> jsonToMap(String json) {
 
         Map<String, Object> map;
 
