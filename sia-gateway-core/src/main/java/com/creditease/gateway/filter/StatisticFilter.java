@@ -63,9 +63,9 @@ public class StatisticFilter extends AbstractGatewayFilter {
         /**
          * 网关流量计数统计
          */
-        sts.increament(GatewayConstant.APISUMCOUNT + "-" + date);
+        int count = sts.increment(GatewayConstant.APISUMCOUNT + "-" + date);
 
-        logger.debug("网关计数:" + sts.getCounte(GatewayConstant.APISUMCOUNT + "-" + date));
+        logger.debug("网关计数:{}", count);
 
     }
 
