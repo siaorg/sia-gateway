@@ -153,7 +153,7 @@ export default {
     getZuulGroupList: function () {
       let self = this
       self.gatewayClusterList = JSON.parse(sessionStorage.getItem('selectAuth'))
-      if (JSON.parse(sessionStorage.getItem('selectAuth')).indexOf('admin') === -1) {
+      if (self.gatewayClusterList == null || JSON.parse(sessionStorage.getItem('selectAuth')).indexOf('admin') === -1) {
         self.gatewayIsSelect = false
       } else {
         self.gatewayIsSelect = true
