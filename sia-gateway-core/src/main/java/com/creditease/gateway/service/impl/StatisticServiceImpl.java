@@ -22,7 +22,7 @@
 package com.creditease.gateway.service.impl;
 
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 
 import com.creditease.gateway.service.StatisticService;
 import com.google.common.collect.Maps;
@@ -35,33 +35,33 @@ import com.google.common.collect.Maps;
 
 public class StatisticServiceImpl implements StatisticService {
 
-    private Map<String, AtomicInteger> map = Maps.newConcurrentMap();
+    private Map<String, LongAdder> map = Maps.newConcurrentMap();
 
     /**
      * 计数操作
      */
     @Override
-    public int increment(String counterName) {
+    public void increment(String counterName) {
 
-        AtomicInteger aInt = map.get(counterName);
+        LongAdder longAdder = map.get(counterName);
 
-        if (aInt == null) {
-            map.putIfAbsent(counterName, new AtomicInteger(0));
+        if (longAdder == null) {
+            map.putIfAbsent(counterName, new LongAdder());
 
-            aInt = map.get(counterName);
+            longAdder = map.get(counterName);
         }
 
-        return aInt.incrementAndGet();
+        longAdder.increment();
     }
 
     /**
      * 获得计数
      */
     @Override
-    public int getCount(String counterName) {
+    public long getCount(String counterName) {
 
-        AtomicInteger aInt = map.get(counterName);
+        LongAdder longAdder = map.get(counterName);
 
-        return aInt == null ? 0 : aInt.get();
+        return longAdder == null ? 0 : longAdder.sum();
     }
 }

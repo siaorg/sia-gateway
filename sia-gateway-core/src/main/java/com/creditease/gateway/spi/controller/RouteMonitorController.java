@@ -72,8 +72,8 @@ public class RouteMonitorController extends BaseAdminController {
             calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
 
             String date = DateTimeHelper.dateFormat(calendar.getTime(), dateFormat);
-            int gwSumCount = statisticservice.getCount(GatewayConstant.APISUMCOUNT + "-" + date);
-            int gwFailCount = statisticservice.getCount(GatewayConstant.APIFAILCOUNT + "-" + date);
+            long gwSumCount = statisticservice.getCount(GatewayConstant.APISUMCOUNT + "-" + date);
+            long gwFailCount = statisticservice.getCount(GatewayConstant.APIFAILCOUNT + "-" + date);
             String rst = "" + gwSumCount + "-" + gwFailCount;
 
             LOGGER.info("> 网关统计结果 >, routeID:{}", rst);
@@ -100,8 +100,8 @@ public class RouteMonitorController extends BaseAdminController {
             String routeid = msg.getRequest().get("routeid");
             LOGGER.info("> 路由统计, routeID:" + routeid);
 
-            int routeSumCount = statisticservice.getCount(routeid);
-            int routeFailCount = statisticservice.getCount(GatewayConstant.APIFAILCOUNT + "-" + routeid);
+            long routeSumCount = statisticservice.getCount(routeid);
+            long routeFailCount = statisticservice.getCount(GatewayConstant.APIFAILCOUNT + "-" + routeid);
             msg.setCode(ResponseCode.SUCCESS_CODE.getCode());
 
             String rst = "" + routeSumCount + "-" + routeFailCount;

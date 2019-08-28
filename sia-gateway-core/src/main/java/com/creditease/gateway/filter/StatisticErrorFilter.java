@@ -80,9 +80,9 @@ public class StatisticErrorFilter extends AbstractGatewayFilter {
         /**
          * 整体异常流量计数统计
          */
-        int errorCount = sts.increment(GatewayConstant.APIFAILCOUNT + "-" + date);
+        sts.increment(GatewayConstant.APIFAILCOUNT + "-" + date);
 
-        logger.debug("网关错误计数:{}", errorCount);
+        logger.debug("网关错误计数:{}", sts.getCount(GatewayConstant.APIFAILCOUNT + "-" + date));
 
         /**
          * 绑定统计组件后执行UrlAnalysisService
