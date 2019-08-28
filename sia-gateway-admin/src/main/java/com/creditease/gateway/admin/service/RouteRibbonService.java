@@ -41,184 +41,188 @@ import com.creditease.gateway.message.Message;
 @Service
 public class RouteRibbonService extends BaseAdminService {
 
-	private static final String BRSTRAGEGY = "Greenblue";
+    private static final String BRSTRAGEGY = "Greenblue";
 
-	private static final String CANARY = "Canary";
+    private static final String CANARY = "Canary";
 
-	public RouteRibbonHolder queryRouteRibbon(String serviceId, String routeid) throws Exception {
+    public RouteRibbonHolder queryRouteRibbon(String serviceId, String routeid) throws Exception {
 
-		List<String> versionList = zuulDiscovery.getServiceVersions(serviceId);
+        List<String> versionList = zuulDiscovery.getServiceVersions(serviceId);
 
-		/**
-		 *
-		 * new RouteRibbonHolder(routid,"1.0", "1.0;1.2",currentTime,
-		 * "Greenblue");
-		 *
-		 **/
-		if (versionList == null || versionList.size() <= 0) {
+        /**
+         *
+         * new RouteRibbonHolder(routid,"1.0", "1.0;1.2",currentTime, "Greenblue");
+         *
+         **/
+        if (versionList == null || versionList.size() <= 0) {
 
-			return null;
+            return null;
 
-		} else {
+        }
+        else {
 
-			StringBuffer allvesr = new StringBuffer();
+            StringBuffer allvesr = new StringBuffer();
 
-			for (String v : versionList) {
-				allvesr.append(v + ";");
-			}
+            for (String v : versionList) {
+                allvesr.append(v + ";");
+            }
 
-			RouteRibbonHolder holder = compDBRepository.queryrouteVerion(serviceId, routeid);
+            RouteRibbonHolder holder = compDBRepository.queryrouteVerion(serviceId, routeid);
 
-			String allversionStr = null;
+            String allversionStr = null;
 
-			if (allvesr != null) {
-				allversionStr = allvesr.toString();
+            if (allvesr != null) {
+                allversionStr = allvesr.toString();
 
-				allversionStr = allversionStr.substring(0, allversionStr.lastIndexOf(";"));
-			}
+                allversionStr = allversionStr.substring(0, allversionStr.lastIndexOf(";"));
+            }
 
-			if (holder == null) {
-				holder = new RouteRibbonHolder(serviceId, null, null, allversionStr, null, "GreenBlue");
-			} else {
-				holder.setAllVersions(allversionStr);
-			}
+            if (holder == null) {
+                holder = new RouteRibbonHolder(serviceId, null, null, allversionStr, null, "GreenBlue");
+            }
+            else {
+                holder.setAllVersions(allversionStr);
+            }
 
-			return holder;
-		}
+            return holder;
+        }
 
-	}
+    }
 
-	/**
-	 *
-	 * 保存蓝绿部署设置
-	 */
-	public RouteRibbonHolder saveBRRouteRibbon(String serviceid, String routid, String version) throws Exception {
+    /**
+     *
+     * 保存蓝绿部署设置
+     */
+    public RouteRibbonHolder saveBRRouteRibbon(String serviceid, String routid, String version) throws Exception {
 
-		RouteRibbonHolder holder = compDBRepository.queryrouteVerionByRouteId(routid);
+        RouteRibbonHolder holder = compDBRepository.queryrouteVerionByRouteId(routid);
 
-		List<String> versionlist = zuulDiscovery.getServiceVersions(serviceid);
+        List<String> versionlist = zuulDiscovery.getServiceVersions(serviceid);
 
-		StringBuffer allvesr = new StringBuffer();
+        StringBuffer allvesr = new StringBuffer();
 
-		for (String v : versionlist) {
-			allvesr.append(v + ";");
-		}
+        for (String v : versionlist) {
+            allvesr.append(v + ";");
+        }
 
-		/**
-		 * 更新数据库
-		 *
-		 */
-		RouteRibbonHolder hd;
+        /**
+         * 更新数据库
+         *
+         */
+        RouteRibbonHolder hd;
 
-		boolean rst = false;
+        boolean rst = false;
 
-		if (holder == null) {
+        if (holder == null) {
 
-			hd = new RouteRibbonHolder(routid, serviceid, version, allvesr.toString(), null, BRSTRAGEGY);
-			rst = compDBRepository.addRouteRibbonHolder(hd);
+            hd = new RouteRibbonHolder(routid, serviceid, version, allvesr.toString(), null, BRSTRAGEGY);
+            rst = compDBRepository.addRouteRibbonHolder(hd);
 
-		} else {
+        }
+        else {
 
-			rst = compDBRepository.udpateRouteRibbon(serviceid, routid, version);
-			holder.setCurrentVersion(version);
+            rst = compDBRepository.udpateRouteRibbon(serviceid, routid, version);
+            holder.setCurrentVersion(version);
 
-			hd = holder;
-		}
+            hd = holder;
+        }
 
-		if (!rst) {
-			LOGGER.info("saveRouteRibbon 数据库更新结果:{}", rst);
-			return null;
-		}
+        if (!rst) {
+            LOGGER.info("saveRouteRibbon 数据库更新结果:{}", rst);
+            return null;
+        }
 
-		/**
-		 * 通知GW刷新
-		 */
-		List<String> zuulList = zuulDiscovery.getServiceList(getZuulGroupName(routid));
+        /**
+         * 通知GW刷新
+         */
+        List<String> zuulList = zuulDiscovery.getServiceList(getZuulGroupName(routid));
 
-		/**
-		 *
-		 * Step3: 调用所有ZUUL-Instnace的/refresh接口同步DB到LocalCache完成同步
-		 */
-		for (String path : zuulList) {
-			String url = "http://" + path;
-			Map<String, String> map = new HashMap<String, String>(8);
-			map.put("routid", routid);
-			map.put("version", version);
-			Message msg = new Message(map);
-			String result = handler.executeHttpCmd(url, GatewayConstant.ADMINOPTKEY.SWR.getValue(), msg);
+        /**
+         *
+         * Step3: 调用所有ZUUL-Instnace的/refresh接口同步DB到LocalCache完成同步
+         */
+        for (String path : zuulList) {
+            String url = "http://" + path;
+            Map<String, String> map = new HashMap<String, String>(8);
+            map.put("routid", routid);
+            map.put("version", version);
+            Message msg = new Message(map);
+            String result = handler.executeHttpCmd(url, GatewayConstant.ADMINOPTKEY.SWR.getValue(), msg);
 
-			LOGGER.info("refreshRoute rst:{}", result);
-		}
+            LOGGER.info("refreshRoute rst:{}", result);
+        }
 
-		return hd;
-	}
+        return hd;
+    }
 
-	/**
-	 *
-	 * 保存金丝雀部署设置
-	 */
-	public RouteRibbonHolder saveCanaryRouteRibbon(String serviceid, String routid, String context) throws Exception {
+    /**
+     *
+     * 保存金丝雀部署设置
+     */
+    public RouteRibbonHolder saveCanaryRouteRibbon(String serviceid, String routid, String context) throws Exception {
 
-		RouteRibbonHolder holder = compDBRepository.queryrouteVerionByRouteId(routid);
+        RouteRibbonHolder holder = compDBRepository.queryrouteVerionByRouteId(routid);
 
-		List<String> versionlist = zuulDiscovery.getServiceVersions(serviceid);
+        List<String> versionlist = zuulDiscovery.getServiceVersions(serviceid);
 
-		StringBuffer allvesr = new StringBuffer();
+        StringBuffer allvesr = new StringBuffer();
 
-		for (String v : versionlist) {
-			allvesr.append(v + ";");
-		}
+        for (String v : versionlist) {
+            allvesr.append(v + ";");
+        }
 
-		/**
-		 * 更新数据库
-		 *
-		 */
-		RouteRibbonHolder hd;
+        /**
+         * 更新数据库
+         *
+         */
+        RouteRibbonHolder hd;
 
-		boolean rst = false;
+        boolean rst = false;
 
-		if (holder == null) {
+        if (holder == null) {
 
-			hd = new RouteRibbonHolder(routid, serviceid, null, allvesr.toString(), null, CANARY);
+            hd = new RouteRibbonHolder(routid, serviceid, null, allvesr.toString(), null, CANARY);
 
-			hd.setContext(context);
-			rst = compDBRepository.addRouteRibbonHolder(hd);
+            hd.setContext(context);
+            rst = compDBRepository.addRouteRibbonHolder(hd);
 
-		} else {
+        }
+        else {
 
-			rst = compDBRepository.udpateCanaryRibbon(serviceid, routid, context);
+            rst = compDBRepository.udpateCanaryRibbon(serviceid, routid, context, CANARY);
 
-			hd = holder;
-		}
+            hd = holder;
+        }
 
-		if (!rst) {
-			LOGGER.info(" saveRouteRibbon 数据库更新结果:{}", rst);
-			return null;
-		}
+        if (!rst) {
+            LOGGER.info(" saveRouteRibbon 数据库更新结果:{}", rst);
+            return null;
+        }
 
-		/**
-		 * 通知GW刷新
-		 */
+        /**
+         * 通知GW刷新
+         */
 
-		try {
-			List<String> zuulList = zuulDiscovery.getServiceList(getZuulGroupName(routid));
-			/**
-			 *
-			 * Step3: 调用所有ZUUL-Instnace的/refresh接口同步DB到LocalCache完成同步
-			 */
-			for (String path : zuulList) {
-				String url = "http://" + path;
-				Map<String, String> map = new HashMap<String, String>(8);
-				map.put("routid", routid);
-				map.put("version", null);
-				Message msg = new Message(map);
-				String result = handler.executeHttpCmd(url, GatewayConstant.ADMINOPTKEY.SWR.getValue(), msg);
+        try {
+            List<String> zuulList = zuulDiscovery.getServiceList(getZuulGroupName(routid));
+            /**
+             *
+             * Step3: 调用所有ZUUL-Instnace的/refresh接口同步DB到LocalCache完成同步
+             */
+            for (String path : zuulList) {
+                String url = "http://" + path;
+                Map<String, String> map = new HashMap<String, String>(8);
+                map.put("routid", routid);
+                map.put("version", null);
+                Message msg = new Message(map);
+                String result = handler.executeHttpCmd(url, GatewayConstant.ADMINOPTKEY.SWR.getValue(), msg);
 
-				LOGGER.info("refreshRoute rst:{}", result);
-			}
-		} catch (Exception e) {
-			LOGGER.info("saveRouteRibbon notify failed:{}" + e.getCause());
-		}
-		return hd;
-	}
+                LOGGER.info("refreshRoute rst:{}", result);
+            }
+        }
+        catch (Exception e) {
+            LOGGER.info("saveRouteRibbon notify failed:{}" + e.getCause());
+        }
+        return hd;
+    }
 }

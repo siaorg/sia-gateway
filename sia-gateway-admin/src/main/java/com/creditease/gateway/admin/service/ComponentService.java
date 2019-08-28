@@ -28,6 +28,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
+
+import com.creditease.gateway.admin.config.LocalMetaDataLoader;
+import com.google.common.base.Joiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -38,6 +42,8 @@ import com.creditease.gateway.domain.RouteObj;
 import com.creditease.gateway.helper.IoHelper;
 import com.creditease.gateway.helper.StringHelper;
 import com.creditease.gateway.message.Message;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 /**
  * 组件管理服务
@@ -99,27 +105,53 @@ public class ComponentService extends BaseAdminService {
 
 	/**
 	 * 綁定路由
-	 * 
+	 *
 	 */
 	public boolean compBindRoute(List<String> request, String compFilterName) throws Exception {
-
 		boolean rst = false;
+		try {
+			/**
+			 * 公共组件会出现routeidlist数据共享问题，这里需要特殊处理
+			 */
+			code:if(LocalMetaDataLoader.publicfilterSet.contains(compFilterName)){
+				/**
+				 * 获取数据库中原始routeidlist字段值
+				 */
+				String routeIds  = compDBRepository.queryCompDetail(compFilterName,"ALL").getRouteidList();
+				if(StringUtils.isEmpty(routeIds)){
+					break code;
+				}
+				List<String> originRouteList = Arrays.asList(routeIds.split(";"));
 
-		StringBuffer routeidsBuffer = new StringBuffer();
+				/**
+				 * 获取当前角色组关联的所有routeid
+				 */
+				List<RouteObj> routeObjs = dbRepository.getRouteList();
+				if(CollectionUtils.isEmpty(routeObjs)){
+					return false;
+				}
+				List<String> currentRouteIds = routeObjs.stream().map(x -> x.getRouteid()).collect(Collectors.toList());
 
-		for (String routeid : request) {
-			routeidsBuffer.append(routeid);
-			routeidsBuffer.append(";");
+				/**
+				 * 获取非当前用户组  且  绑定公共组件的所有routeIds
+				 */
+				List<String> notCurrentRouteIds = originRouteList.stream().filter(x -> !currentRouteIds.contains(x)).collect(Collectors.toList());
+
+				/**
+				 * 合并--> 当前最新的routeIds
+				 */
+				request.addAll(notCurrentRouteIds);
+			}
+			rst = compDBRepository.bindRoute(Joiner.on(";").join(request), compFilterName);
+			if (rst) {
+				remoteCall(getZuulGroupName());
+			}
+		} catch (Exception e) {
+			LOGGER.error(">>>>> 为路由绑定组件失败！", e);
 		}
-
-		rst = compDBRepository.bindRoute(routeidsBuffer.toString(), compFilterName);
-		if (rst) {
-			remoteCall(getZuulGroupName());
-		} else {
-			return false;
-		}
-		return true;
+		return rst;
 	}
+
 
 	/**
 	 * 遠端ZUUL-WEB接口調用

@@ -74,7 +74,7 @@ public class GatewayMonitorScheduledTask {
     @Scheduled(cron = "0 0 0/1 * * ?")
     public void statisticCronTask() {
 
-        LOGGER.info(">开始网关GatewayMonitorScheduledTask: time:{}" + new Date(System.currentTimeMillis()));
+        LOGGER.info(">开始网关GatewayMonitorScheduledTask: time:{}", new Date(System.currentTimeMillis()));
 
         List<ZuulInfo> zuulist = new ArrayList<ZuulInfo>();
 

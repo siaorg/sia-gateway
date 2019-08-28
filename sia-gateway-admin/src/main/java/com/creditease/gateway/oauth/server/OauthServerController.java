@@ -58,7 +58,7 @@ import com.creditease.gateway.oauth.AuthServerRunner;
 /**
  * 证管理中心
  * 
- * @author peihua 认
+ * @author peihua 
  * 
  */
 
