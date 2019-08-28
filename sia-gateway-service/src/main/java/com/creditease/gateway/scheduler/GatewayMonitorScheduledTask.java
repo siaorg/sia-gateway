@@ -104,8 +104,7 @@ public class GatewayMonitorScheduledTask {
                 String counterKeysuccess = GatewayConstant.APISUMCOUNT + "-" + dateTime;
 
                 String url = "http://" + instatnce;
-                String rst = new String();
-                rst = handler.executeHttpCmd(url, GatewayConstant.ADMINOPTKEY.GWS.getValue(), new Message());
+                String rst = handler.executeHttpCmd(url, GatewayConstant.ADMINOPTKEY.GWS.getValue(), new Message());
 
                 LOGGER.info(">>>> GatewayMonitorScheduledTask remoteCall rst:" + rst);
 
