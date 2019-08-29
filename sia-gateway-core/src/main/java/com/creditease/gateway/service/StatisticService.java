@@ -36,7 +36,7 @@ public interface StatisticService {
      * @param counterName
      * @return void
      */
-    int increment(String counterName);
+    void increment(String counterName);
 
     /**
      * 获得计数
@@ -44,6 +44,6 @@ public interface StatisticService {
      * @param counterName
      * @return int
      */
-    int getCount(String counterName);
+    long getCount(String counterName);
 
 }
