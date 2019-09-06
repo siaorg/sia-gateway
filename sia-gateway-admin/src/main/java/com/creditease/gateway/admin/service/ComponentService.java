@@ -163,8 +163,12 @@ public class ComponentService extends BaseAdminService {
 
 		for (String path : zuulList) {
 			String url = "http://" + path;
-			String result = handler.executeHttpCmd(url, GatewayConstant.ADMINOPTKEY.BRR.getValue(), new Message());
-			LOGGER.info("remoteCall rst:{}", result);
+			try {
+				String result = handler.executeHttpCmd(url, GatewayConstant.ADMINOPTKEY.BRR.getValue(), new Message());
+				LOGGER.info("remoteCall rst:{}", result);
+			} catch (Exception e) {
+				LOGGER.error(">>>> notify remote gateway core refresh bindRoutes fail，url = [{}]", url, e);
+			}
 		}
 
 	}
