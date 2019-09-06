@@ -82,7 +82,7 @@ public class SagMqProperties {
 
         public static class Producer {
 
-            private int numOfPartition = 0;
+            private int numOfPartition = 1;
 
             public int getNumOfPartition() {
                 return numOfPartition;
