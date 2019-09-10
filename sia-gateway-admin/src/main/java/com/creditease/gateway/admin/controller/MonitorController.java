@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -84,8 +85,8 @@ public class MonitorController extends BaseAdminController {
     private static final String KEEP_ALIVE_COUNT = "keepAliveCount";
     private static final String MAX_CONNECTIONS = "maxConnections";
 
-    @Value("${monitorName}")
-    private String monitorName;
+    @Value("${monitorAddress}")
+    private String monitorAddress;
 
     @Autowired
     private ZuulHandler handler;
@@ -226,15 +227,13 @@ public class MonitorController extends BaseAdminController {
     public String getLogUrl(@RequestParam("ipport") String ipPort) {
 
         try {
-            List<String> list = discoveryService.getServiceList(monitorName);
-
-            if (list == null || list.size() == 0) {
-                logger.warn("ipPort of {} is empty!", monitorName);
+            if (StringUtils.isEmpty(monitorAddress)) {
+                logger.warn("ipPort of {} is empty!", monitorAddress);
 
                 return null;
             }
 
-            String url = "http://" + list.get(0) + "/monitor/logfile?ipport=" + ipPort;
+            String url = "http://" + monitorAddress + "/monitor/logfile?ipport=" + ipPort;
 
             logger.info("getLogUrl, url:[{}]", url);
 
