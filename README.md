@@ -1,3 +1,14 @@
+## 关于我们
+
+* 邮件交流：sia.list@creditease.cn
+
+* 提交issue:
+
+* 微信交流：
+
+    <img src="docs/static_files/newlog.jpeg" width="30%" height="30%">
+    
+
 # SIA-GATEWAY| [English](README-en.md) [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 [使用指南](docs/user_guide.md) </br>
@@ -255,15 +266,5 @@ SIA-GateWay将架构的可扩展性作为重要的对外输出能力，第三方
 
 + [Rabbitmq队列服务PLUS](https://github.com/siaorg/sia-rabbitmq-plus)
 
-
-## 关于我们
-
-* 邮件交流：sia.list@creditease.cn
-
-* 提交issue:
-
-* 微信交流：
-
-    <img src="docs/static_files/newlog.jpeg" width="30%" height="30%">
     
 （待补充）

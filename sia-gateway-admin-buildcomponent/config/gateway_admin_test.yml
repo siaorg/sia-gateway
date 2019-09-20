@@ -87,7 +87,7 @@ spring.kibana.url.create: http://127.0.0.1:5601/es_admin/.kibana/index-pattern/
 ALARM_EMAIL_ADDRESS: ## http://127.0.0.1:8070/alarmEmail/sendAlarmEmail
 
 # hystrix dashboard conf
-monitorName: API-GATEWAY-MONITOR
+monitorAddress: 127.0.0.1:8040
 # fresh cycle
 delay: 10000
 
