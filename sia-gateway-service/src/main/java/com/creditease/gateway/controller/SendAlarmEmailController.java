@@ -48,11 +48,6 @@ public class SendAlarmEmailController {
     @ResponseBody
     public void sendAlarmEmail(@RequestBody AlarmEmailVO alarmEmailVO) {
 
-        try {
-            emailAlarmPost.post(alarmEmailVO);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        emailAlarmPost.post(alarmEmailVO);
     }
 }

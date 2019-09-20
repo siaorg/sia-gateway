@@ -62,14 +62,14 @@ public class NotifySuperGatewayScheduledTask {
     @Scheduled(cron = "0 0 0/1 * * ?")
     public void notifyCronTask() {
 
-        LOGGER.info(">开始刷新超级网关通知事件 time:{}" + new Date(System.currentTimeMillis()));
+        LOGGER.info(">开始刷新超级网关通知事件 time:{}", new Date());
 
         List<String> zuulList = new ArrayList<String>();
         try {
             zuulList = zuulDiscovery.getServiceList(GatewayConstant.API_GATEWAY_CORE);
         }
         catch (Exception e) {
-            LOGGER.error("刷新超级网关通知 Exception:{}", e.getCause());
+            LOGGER.error("刷新超级网关通知 Exception:{}", e);
         }
         for (String path : zuulList) {
             String url = "http://" + path;
@@ -81,7 +81,7 @@ public class NotifySuperGatewayScheduledTask {
             catch (Exception e) {
                 LOGGER.error("> notifyCronTask exception: " + e);
             }
-            LOGGER.info("refreshRoute rst:" + result);
+            LOGGER.info("refreshRoute rst:{}", result);
         }
 
     }

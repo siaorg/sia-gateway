@@ -116,9 +116,8 @@ public class RouteDbRepository extends BaseAdminRepository {
 						routeobj.getRouteStatus(), routeobj.getStrategy());
 			}
 
-			LOGGER.info("routeid:[{}],path:[{}] ", routeobj.getRouteid(), routeobj.getPath());
-			LOGGER.info("DBRepository insert route obj result:{} ", rst);
-
+			LOGGER.info("insert route, routeid:[{}], path:[{}], insert result:[{}]", routeobj.getRouteid(),
+					routeobj.getPath(), rst);
 		} catch (DataAccessException e) {
 
 			LOGGER.info("addRoute errror message:[{}]", e.getMessage(), e);

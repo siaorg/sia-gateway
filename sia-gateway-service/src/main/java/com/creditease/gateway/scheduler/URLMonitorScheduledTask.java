@@ -36,8 +36,6 @@ import com.creditease.gateway.domain.UrlRecordAggregate;
 import com.creditease.gateway.domain.ZuulInfo;
 import com.creditease.gateway.helper.JsonHelper;
 import com.creditease.gateway.message.ZuulHandler;
-import com.creditease.gateway.service.SchedulerService;
-import com.creditease.gateway.service.repository.SechduleRepository;
 
 /**
  * URL定时统计任务
@@ -50,21 +48,12 @@ import com.creditease.gateway.service.repository.SechduleRepository;
 public class URLMonitorScheduledTask {
 
     @Autowired
-    SchedulerService sts;
-
-    @Autowired
-    SechduleRepository schedulerepository;
-
-    @Autowired
     ZuulHandler handler;
-
-    String dateFormat = "yyyy-MM-dd HH";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(URLMonitorScheduledTask.class);
 
     private Map<String, Map<String, UrlRecordAggregate>> urlCacheGroup = new HashMap<String, Map<String, UrlRecordAggregate>>();
 
-    // private
     private Map<String, UrlRecordAggregate> urlRecordCache;
 
     public void statisticCronTask(List<ZuulInfo> zuulist) {

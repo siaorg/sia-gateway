@@ -39,7 +39,7 @@ import com.creditease.gateway.helper.DateTimeHelper;
 import com.creditease.gateway.message.Message;
 import com.creditease.gateway.message.ZuulHandler;
 import com.creditease.gateway.service.SchedulerService;
-import com.creditease.gateway.service.repository.SechduleRepository;
+import com.creditease.gateway.service.repository.SchedulerRepository;
 
 /**
  * 网关統計任務
@@ -57,7 +57,7 @@ public class GatewayMonitorScheduledTask {
     SchedulerService sts;
 
     @Autowired
-    SechduleRepository schedulerepository;
+    SchedulerRepository schedulerepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GatewayMonitorScheduledTask.class);
 

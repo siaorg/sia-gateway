@@ -75,9 +75,10 @@ public class LogSinkStarter extends AbstractSinkStarter {
         try {
             ByteArrayOutputStream result = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
+            int length;
 
-            while (in.read(buffer) != -1) {
-                result.write(buffer);
+            while ((length = in.read(buffer)) != -1) {
+                result.write(buffer, 0, length);
             }
 
             in.close();

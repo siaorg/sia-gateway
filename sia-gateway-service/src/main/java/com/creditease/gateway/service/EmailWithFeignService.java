@@ -39,9 +39,9 @@ public interface EmailWithFeignService {
     /**
      * 发送预警邮件
      * 
-     * @param JSON
+     * @param str
      * @return
      */
     @RequestMapping(value = "v1/sendEmail", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
-    ResponseEntity<String> sendAlarmEmail(@RequestBody String json);
+    ResponseEntity<String> sendAlarmEmail(@RequestBody String str);
 }
