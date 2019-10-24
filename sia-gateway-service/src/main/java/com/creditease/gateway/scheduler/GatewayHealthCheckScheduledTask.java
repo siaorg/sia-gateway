@@ -38,7 +38,7 @@ import com.creditease.gateway.helper.JsonHelper;
 import com.creditease.gateway.service.SchedulerService;
 import com.creditease.gateway.service.abstractlist.AbstractPostAlarmInfo;
 import com.creditease.gateway.service.abstractlist.EmailAlarmPostImpl;
-import com.creditease.gateway.service.repository.SechduleRepository;
+import com.creditease.gateway.service.repository.SchedulerRepository;
 import com.creditease.gateway.vo.AlarmEmailVO;
 
 /**
@@ -59,7 +59,7 @@ public class GatewayHealthCheckScheduledTask {
     SchedulerService sts;
 
     @Autowired
-    SechduleRepository schedulerepository;
+    SchedulerRepository schedulerepository;
 
     @Autowired
     private DiscoveryService zuuldisc;

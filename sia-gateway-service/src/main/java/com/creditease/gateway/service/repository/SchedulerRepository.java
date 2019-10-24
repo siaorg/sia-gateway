@@ -34,7 +34,6 @@ import org.springframework.stereotype.Repository;
 import com.creditease.gateway.constant.GatewayConstant;
 import com.creditease.gateway.domain.CounterInfo;
 import com.creditease.gateway.domain.ZuulInfo;
-import com.creditease.gateway.helper.JsonHelper;
 import com.creditease.gateway.helper.StringHelper;
 
 /**
@@ -44,15 +43,14 @@ import com.creditease.gateway.helper.StringHelper;
  **/
 
 @Repository
-public class SechduleRepository {
+public class SchedulerRepository {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SechduleRepository.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SchedulerRepository.class);
 
-    private static final String INSERTCOUNTER = "INSERT INTO gateway_counter (zuulGroupName, zuulInstance, counterKey, counterValue, datetime) values(?,?,?,?,?)";
-    private static final String INSERTROUTECOUNTER = "INSERT INTO gateway_route_counter (zuulInstance, routeid,sumCount, failCount, datetime) values(?,?,?,?,?)";
-    private static final String QUERYZUULLIST = "select * from gateway_info ";
-    private static final String SELECTROUTEIDBINDTOSTATISTIC = "SELECT routeidList FROM gateway_component where compFilterName='StatisticFilter';";
-    private static final String UPDATE_GATEWAY_STATUS_BYID = " update gateway_info  set zuulStatus = '%s' where zuulInstanceId = '%s' ";
+    private static final String INSERT_COUNTER = "INSERT INTO gateway_counter (zuulGroupName, zuulInstance, counterKey, counterValue, datetime) values(?,?,?,?,?)";
+    private static final String QUERY_ZUUL_LIST = "select * from gateway_info ";
+    private static final String SELECT_ROUTEID_BIND_TO_STATISTIC = "SELECT routeidList FROM gateway_component where compFilterName='StatisticFilter' ";
+    private static final String UPDATE_GATEWAY_STATUS_BY_ID = " update gateway_info  set zuulStatus = '%s' where zuulInstanceId = '%s' ";
     private static final String UPDATE_GATEWAY_STATUS = " update gateway_info  set zuulStatus = '%s' ";
 
     @Autowired
@@ -61,48 +59,32 @@ public class SechduleRepository {
 
     public boolean insertCounter(CounterInfo counter, String zuulGroupName) {
 
-        try {
+        LOGGER.info("insert CounterKey:{} ,groupName:{}, instance:{}", counter.getCouterKey(), zuulGroupName, counter.getZuulInstance());
 
-            LOGGER.info("insert CouterKey:{},groupName:{}", counter.getCouterKey(), zuulGroupName);
-            LOGGER.info("zuulGroupName:[{}],zuulInstance:[{}]", zuulGroupName, counter.getZuulInstance());
+        gatewayJdbcTemplate.update(INSERT_COUNTER, zuulGroupName, counter.getZuulInstance(), counter.getCouterKey(),
+                counter.getCounterValue(), counter.getDatetime());
 
-            gatewayJdbcTemplate.update(INSERTCOUNTER, zuulGroupName, counter.getZuulInstance(), counter.getCouterKey(),
-                    counter.getCounterValue(), counter.getDatetime());
-
-            LOGGER.info("insert counter success!");
-            return true;
-        }
-        catch (Exception e) {
-            throw e;
-        }
+        return true;
     }
 
     /**
      * 获取全部 zuul节点
-     * 
+     *
      * @return
      */
     public List<ZuulInfo> queryZuulList() throws Exception {
 
-        List<ZuulInfo> results = gatewayJdbcTemplate.query(QUERYZUULLIST, new BeanPropertyRowMapper<>(ZuulInfo.class));
-        LOGGER.info("get zuul success! results:{}", JsonHelper.toString(results));
-
-        return results;
-
+        return gatewayJdbcTemplate.query(QUERY_ZUUL_LIST, new BeanPropertyRowMapper<>(ZuulInfo.class));
     }
 
     /**
-     * 获取綁定到統計組建的路由ID
-     * 
+     * 获取绑定到统计组件的路由ID
+     *
      * @return
      */
     public String queryRouteIdList() throws Exception {
 
-        String rst = gatewayJdbcTemplate.queryForObject(SELECTROUTEIDBINDTOSTATISTIC, String.class);
-        LOGGER.info("get queryRouteIdList success!");
-
-        return rst;
-
+        return gatewayJdbcTemplate.queryForObject(SELECT_ROUTEID_BIND_TO_STATISTIC, String.class);
     }
 
     /**
@@ -111,11 +93,10 @@ public class SechduleRepository {
     public void updateZuulInfoStatusByID(String instanceId, String status) {
 
         try {
-            String updateSql = StringHelper.format(UPDATE_GATEWAY_STATUS_BYID, status, instanceId);
+            String updateSql = StringHelper.format(UPDATE_GATEWAY_STATUS_BY_ID, status, instanceId);
             gatewayJdbcTemplate.update(updateSql);
-        }
-        catch (Exception e) {
-            LOGGER.error("网关系统-更新网关状态失败,instance-id：[ {} ],请检查!", e);
+        } catch (Exception e) {
+            LOGGER.error("网关系统-更新网关状态失败, 请检查!", e);
         }
     }
 
@@ -127,10 +108,8 @@ public class SechduleRepository {
         try {
             String updateSql = StringHelper.format(UPDATE_GATEWAY_STATUS, status);
             gatewayJdbcTemplate.update(updateSql);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             LOGGER.error("全量更新网关状态失败,请检查!", e);
         }
     }
-
 }

@@ -198,7 +198,7 @@ CREATE TABLE `gateway_fallback` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---admin审计表
+-- admin审计表
 DROP TABLE IF EXISTS `gateway_audit`;
 CREATE TABLE `gateway_audit` (
   `id` int(11) NOT NULL auto_increment COMMENT '操作日志id',
@@ -212,6 +212,17 @@ CREATE TABLE `gateway_audit` (
   `status` tinyint(2) default NULL COMMENT '操作描述（1:执行成功、2:执行失败）',
   `params` text default null comment '请求参数',
   PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- 增加eureka urls表
+DROP TABLE IF EXISTS `gateway_eureka`;
+create table gateway_eureka
+(
+  zuulGroupName varchar(50)  not null
+    primary key,
+  eurekaUrls    varchar(255) not null,
+  enable        tinyint(1)   not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `gateway_component` (`id`,`compName`,`compFilterName`,`compType`,`compOrder`,`compUpdateTime`,`status`,`routeidList`,`compdesc`,`zuulGroupName`) VALUES (1,'请求日志组件','LogRequestFilter','PRE',10,'2018-10-16 16:32:23','log','','公共组件','ALL');

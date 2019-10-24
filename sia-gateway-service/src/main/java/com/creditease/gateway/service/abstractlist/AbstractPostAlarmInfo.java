@@ -62,7 +62,7 @@ public abstract class AbstractPostAlarmInfo {
     @Autowired
     private AlarmRepository alarmRepository;
 
-    public GatewayConstant.GatewayPostResultEnum post(AlarmEmailVO alarmEmailVO) throws Exception {
+    public GatewayConstant.GatewayPostResultEnum post(AlarmEmailVO alarmEmailVO) {
 
         Map<String, Object> map = null;
         try {
@@ -75,31 +75,27 @@ public abstract class AbstractPostAlarmInfo {
             // true : 未达到峰值
             if (pressCheckRule(alarmEmailVO)) {
 
-                String alarmEmailAddress = this.getEmailbyZuulGroupName(alarmEmailVO.getApplicationName());
+                String alarmEmailAddress = this.getEmailByZuulGroupName(alarmEmailVO.getApplicationName());
                 alarmEmailVO.setMailto(Arrays.asList(alarmEmailAddress.split(",")));
 
                 // 组装邮件报文
                 map = this.initEmailTemplate(alarmEmailVO);
 
                 // 发送邮件
-                ResponseEntity<String> result = this.postAction(map);
+                ResponseEntity<String> result = this.postAction(JsonHelper.toString(map));
 
                 LOGGER.info("发送结果：[ {} ]", null == result ? "result is null !" : result.toString());
 
                 // 记录成功发生次数
                 afterPost(alarmEmailVO.getPrimary());
 
-            }
-            else if (alarmEmailVO.getFlag()) {
+            } else if (alarmEmailVO.getFlag()) {
                 return GatewayConstant.GatewayPostResultEnum.CALLBACK_FUNCTION;
-            }
-            else {
+            } else {
                 return GatewayConstant.GatewayPostResultEnum.ARRIVE_PEAK_VALUE;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             LOGGER.error("网关发送预警邮件失败！邮件报文内容：[{}]", JsonHelper.toString(map), e);
-            throw e;
         }
 
         return GatewayConstant.GatewayPostResultEnum.SUCCESS;
@@ -116,8 +112,7 @@ public abstract class AbstractPostAlarmInfo {
 
         if (alarmCount < alarmMaxCount) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -127,23 +122,20 @@ public abstract class AbstractPostAlarmInfo {
         try {
             if (!SUCCESS_POST_COUNT_MAP.containsKey(primary)) {
                 SUCCESS_POST_COUNT_MAP.put(primary, INIT_VALUE);
-            }
-            else {
+            } else {
                 SUCCESS_POST_COUNT_MAP.put(primary, SUCCESS_POST_COUNT_MAP.get(primary) + INIT_VALUE);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             LOGGER.error("邮件发生后，记录success count fail。。。", e);
         }
     }
 
     /**
-     *
      * 组装发送邮件的模板
-     *
+     * <p>
      * { "subject": "this is a alarm email", "mailto ": ["alice@someone.cn", "bob@someone.cn"], "content":
      * "this is the message body", 邮件主体内容 "primary": "this is an unique key", "elapse": 1800 压轴时间
-     *
+     * <p>
      * String subject, String alarmEmailAddress, String content, String primary }
      */
     public Map<String, Object> initEmailTemplate(AlarmEmailVO alarmEmailVO) {
@@ -158,22 +150,20 @@ public abstract class AbstractPostAlarmInfo {
 
     /**
      * 获取收件人邮箱地址
-     * 
-     * @param zuulGroupName
-     *            ：网关组名称
+     *
+     * @param zuulGroupName ：网关组名称
      * @return String
      * @throws Exception
      */
-    public abstract String getEmailbyZuulGroupName(String zuulGroupName) throws Exception;
+    public abstract String getEmailByZuulGroupName(String zuulGroupName) throws Exception;
 
     /**
      * 邮件发送
-     * 
-     * @param map
-     *            邮件发送报文
-     * @throws Exception
+     *
+     * @param str 邮件发送报文
      * @return response
+     * @throws Exception
      */
-    abstract ResponseEntity<String> postAction(Map<String, Object> map) throws Exception;
+    abstract ResponseEntity<String> postAction(String str) throws Exception;
 
 }
