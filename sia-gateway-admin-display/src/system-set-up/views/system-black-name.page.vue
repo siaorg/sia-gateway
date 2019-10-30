@@ -189,7 +189,7 @@ export default {
     },
     handleClickSave: function () {
       let self = this
-      let requestPath = this.isCreate === 'create' ? '/addWBList2Route' : '/updateWBList2Route'
+      let requestPath = this.isCreate === 'create' ? '/addWBList2Route' : '/addWBList2Route'
       let paramsObj = {
         groupId: self.currentGateway,
         routeid: 'globalBlackServiceId',
