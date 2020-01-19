@@ -40,6 +40,7 @@ import com.creditease.gateway.admin.repository.base.BaseAdminRepository;
 import com.creditease.gateway.domain.CompInfo;
 import com.creditease.gateway.domain.RouteRibbonHolder;
 import com.creditease.gateway.helper.StringHelper;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -82,6 +83,8 @@ public class CompDbRepository extends BaseAdminRepository {
     private static final String DELETECOMPONENT = "DELETE FROM gateway_component where compFilterName='%s'";
 
     private static final String UPDATE_COMPDESC = "UPDATE gateway_component SET compdesc ='%s' WHERE compFilterName='%s'";
+
+    private static final String ZUULGROUPNAME  = " and zuulGroupName ='%s'";
 
     /**
      * 查询组件列表
@@ -135,10 +138,19 @@ public class CompDbRepository extends BaseAdminRepository {
      * @return
      */
     public CompInfo queryCompDetail(String compFilterName) throws Exception {
+        return this.queryCompDetail(compFilterName,null);
+    }
+    /**
+     * 获取组件详情
+     *
+     * @return
+     */
+    public CompInfo queryCompDetail(String compFilterName,String zuulGroupName) throws Exception {
 
         try {
 
             String querySQL = StringHelper.format(QUERYCOMPDETAIL, compFilterName);
+            querySQL = querySQL + (!StringUtils.isEmpty(zuulGroupName) ? StringHelper.format(ZUULGROUPNAME, zuulGroupName) : "");
 
             LOGGER.info("CompDBRepository SQL:" + querySQL);
 
@@ -174,7 +186,6 @@ public class CompDbRepository extends BaseAdminRepository {
             throw e;
         }
     }
-
     /**
      * 组件绑定
      *

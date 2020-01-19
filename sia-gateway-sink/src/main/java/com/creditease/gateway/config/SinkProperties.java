@@ -50,11 +50,9 @@ public class SinkProperties {
 
     private int esTemplateOrder = 0;
 
-    private int corePoolSize = 10;
+    private int nThreads = 4;
 
-    private int maximumPoolSize = 10;
-
-    private int blockingQueueSize = 300;
+    private int blockingQueueSize = 100;
 
     private boolean defaultRunnerEnable = false;
 
@@ -153,24 +151,14 @@ public class SinkProperties {
         this.esTemplateOrder = esTemplateOrder;
     }
 
-    public int getCorePoolSize() {
+    public int getNThreads() {
 
-        return corePoolSize;
+        return nThreads;
     }
 
-    public void setCorePoolSize(int corePoolSize) {
+    public void setNThreads(int nThreads) {
 
-        this.corePoolSize = corePoolSize;
-    }
-
-    public int getMaximumPoolSize() {
-
-        return maximumPoolSize;
-    }
-
-    public void setMaximumPoolSize(int maximumPoolSize) {
-
-        this.maximumPoolSize = maximumPoolSize;
+        this.nThreads = nThreads;
     }
 
     public int getBlockingQueueSize() {
@@ -178,9 +166,9 @@ public class SinkProperties {
         return this.blockingQueueSize;
     }
 
-    public void setBlockingQueueSize(int maximumPoolSize) {
+    public void setBlockingQueueSize(int blockingQueueSize) {
 
-        this.maximumPoolSize = maximumPoolSize;
+        this.blockingQueueSize = blockingQueueSize;
     }
 
     public boolean getDefaultRunnerEnable() {

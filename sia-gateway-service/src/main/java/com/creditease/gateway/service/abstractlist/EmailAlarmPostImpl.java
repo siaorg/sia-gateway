@@ -21,17 +21,13 @@
 
 package com.creditease.gateway.service.abstractlist;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import com.creditease.gateway.helper.JsonHelper;
 import com.creditease.gateway.helper.StringHelper;
 import com.creditease.gateway.service.EmailWithFeignService;
 import com.creditease.gateway.service.repository.AlarmRepository;
-import com.creditease.gateway.service.repository.SechduleRepository;
 import org.springframework.util.StringUtils;
 
 /**
@@ -46,14 +42,11 @@ public class EmailAlarmPostImpl extends AbstractPostAlarmInfo {
     @Autowired
     AlarmRepository alarmrepo;
 
-    @Autowired
-    SechduleRepository sechduleRepository;
-
     //@Autowired
     EmailWithFeignService emailWithFeignService;
 
     @Override
-    public String getEmailbyZuulGroupName(String zuulGroupName) {
+    public String getEmailByZuulGroupName(String zuulGroupName) {
 
         try {
             // 通过网关组获取预警邮箱
@@ -61,25 +54,22 @@ public class EmailAlarmPostImpl extends AbstractPostAlarmInfo {
 
             if (StringHelper.isEmpty(alarmEmailAddress)) {
                 alarmEmailAddress = siaEmailAddress;
-            }
-            else {
+            } else {
                 alarmEmailAddress = alarmEmailAddress + (StringUtils.isEmpty(siaEmailAddress) ? SPLIT_SYMBOL + siaEmailAddress : "");
             }
             return alarmEmailAddress;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         }
     }
 
     @Override
-    ResponseEntity<String> postAction(Map<String, Object> map) throws Exception {
+    ResponseEntity<String> postAction(String str) throws Exception {
 
         try {
-            return emailWithFeignService.sendAlarmEmail(JsonHelper.toString(map));
-        }
-        catch (Exception e) {
-            LOGGER.error("预警邮件发送失败！", e);
+            return emailWithFeignService.sendAlarmEmail(str);
+        } catch (Exception e) {
+            LOGGER.error("邮件发送失败！", e);
             throw e;
         }
     }

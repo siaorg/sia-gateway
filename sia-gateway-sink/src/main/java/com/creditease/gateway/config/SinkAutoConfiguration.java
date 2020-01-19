@@ -71,8 +71,7 @@ public class SinkAutoConfiguration {
 
         LogDataCollector collector = new LogDataCollector();
         collector.setIndexPrefix(properties.getEsIndexPrefix());
-        collector.setExecutor(properties.getCorePoolSize(), properties.getMaximumPoolSize(),
-                properties.getBlockingQueueSize());
+        collector.setExecutor(properties.getNThreads(), properties.getBlockingQueueSize());
 
         return collector;
     }

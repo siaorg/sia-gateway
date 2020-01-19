@@ -60,8 +60,8 @@ public class AdminService extends BaseAdminService {
     @Value("${delay}")
     private int delay = 4000;
 
-    @Value("${monitorName}")
-    private String monitorName;
+    @Value("${monitorAddress}")
+    private String monitorAddress;
 
     /**
      * 取得节点信息狀態 service
@@ -331,11 +331,10 @@ public class AdminService extends BaseAdminService {
     public Message getMonitorUrl(String hostInfo) {
 
         try {
-            List<String> monitorInfos = zuulDiscovery.getServiceList(monitorName);
-            if (CollectionUtils.isEmpty(monitorInfos) || StringUtils.isEmpty(monitorInfos.get(0))) {
+            if (StringUtils.isEmpty(monitorAddress)) {
                 return Message.buildExceptionResult("hystrix dashboard not exists!");
             }
-            String monitorUrl = StringHelper.format(GatewayConstant.MONITORURL, monitorInfos.get(0), delay, hostInfo,
+            String monitorUrl = StringHelper.format(GatewayConstant.MONITORURL, monitorAddress, delay, hostInfo,
                     hostInfo);
             LOGGER.error("monitorUrl={}", monitorUrl);
             return Message.buildSuccessResult(monitorUrl);

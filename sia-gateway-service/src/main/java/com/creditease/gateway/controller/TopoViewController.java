@@ -86,47 +86,55 @@ public class TopoViewController {
 
             String groupName = msg.getRequest().get(GatewayConstant.GWGROUPNAME);
 
-            //triggerRouteTopo(groupName);
+            LOGGER.info("getGatewayTopo groupName>{}", groupName);
 
             Map<String, Map<String, RouteTopo>> topo = task.getTopoAll();
             Map<String, RouteTopo> allRouteTopo = topo.get(groupName);
 
             if (allRouteTopo == null) {
+                LOGGER.info("> allRouteTopo is null!");
                 return null;
             }
 
             for (Object value : allRouteTopo.values().toArray()) {
-                RouteTopo topoValue = (RouteTopo) value;
+                try {
+                    RouteTopo topoValue = (RouteTopo) value;
 
-                // 合并节点
-                gatewayTopo.getClientNodes().addAll(topoValue.getClientNodes());
-                gatewayTopo.getZuulNodes().addAll(topoValue.getZuulNodes());
-                gatewayTopo.getUpstreamNodes().addAll(topoValue.getUpstreamNodes());
+                    // 合并节点
+                    gatewayTopo.getClientNodes().addAll(topoValue.getClientNodes());
+                    gatewayTopo.getZuulNodes().addAll(topoValue.getZuulNodes());
+                    gatewayTopo.getUpstreamNodes().addAll(topoValue.getUpstreamNodes());
 
-                // 合并Link
-                Set<Link> linklist = topoValue.getLink();
-                for (Link l : linklist) {
-                    gatewayTopo.addLink(l);
-                }
-
-                // 合并异常信息
-                Map expt = topoValue.getExceptionCause();
-                if (null != expt) {
-                    gatewayTopo.getExceptionCause().putAll(expt);
-                }
-
-                if (null != gatewayTopo) {
-
-                    LOGGER.info("gatewayTopo:{} ", gatewayTopo.toString());
-
-                    Set<Link> links = gatewayTopo.getLink();
-                    if (null != links && links.size() > 0) {
-                        for (Link l : links) {
-                            LinkState state = getLinkState(gatewayTopo, l.getLastRequestTime());
-                            l.setState(state);
-                        }
+                    // 合并Link
+                    Set<Link> linklist = topoValue.getLink();
+                    for (Link l : linklist) {
+                        gatewayTopo.addLink(l);
                     }
 
+                    // 合并异常信息
+                    Map expt = topoValue.getExceptionCause();
+                    if (null != expt) {
+                        gatewayTopo.getExceptionCause().putAll(expt);
+                    }
+
+                    if (null != gatewayTopo) {
+
+                        LOGGER.info("gatewayTopo:{} ", gatewayTopo.toString());
+
+                        Set<Link> links = gatewayTopo.getLink();
+                        if (null != links && links.size() > 0) {
+                            for (Link l : links) {
+                                LinkState state = getLinkState(gatewayTopo, l.getLastRequestTime());
+                                l.setState(state);
+                            }
+                        }
+
+                    }
+                }
+                catch (Exception e) {
+
+                    LOGGER.error(">Exception:{}", e);
+                    continue;
                 }
             }
 
@@ -138,7 +146,7 @@ public class TopoViewController {
         catch (Exception e) {
 
             e.printStackTrace();
-            LOGGER.error("> e:{}", e.getMessage());
+            LOGGER.error("> e:{}", e);
         }
         return null;
     }
@@ -174,7 +182,7 @@ public class TopoViewController {
 
                 if (null != routeview) {
 
-                    LOGGER.info("routeview:{} ", routeview.toString());
+                    LOGGER.debug("routeview:{} ", routeview.toString());
                     Set<Link> links = routeview.getLink();
 
                     if (null != links && links.size() > 0) {

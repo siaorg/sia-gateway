@@ -32,6 +32,8 @@ sink.esAddr: 127.0.0.1:9300
 sink.esTemplateName: gantry_gateway_stream
 sink.esIndexPrefix: sag-
 sink.defaultRunnerEnable: true
+ink.nThreads: 2
+sink.blockingQueueSize: 100
 
 #是否开启Debug功能
 zuul.debug.enabled: true

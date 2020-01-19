@@ -39,7 +39,7 @@ import com.creditease.gateway.helper.DateTimeHelper;
 import com.creditease.gateway.message.Message;
 import com.creditease.gateway.message.ZuulHandler;
 import com.creditease.gateway.service.SchedulerService;
-import com.creditease.gateway.service.repository.SechduleRepository;
+import com.creditease.gateway.service.repository.SchedulerRepository;
 
 /**
  * 网关統計任務
@@ -57,7 +57,7 @@ public class GatewayMonitorScheduledTask {
     SchedulerService sts;
 
     @Autowired
-    SechduleRepository schedulerepository;
+    SchedulerRepository schedulerepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GatewayMonitorScheduledTask.class);
 
@@ -74,7 +74,7 @@ public class GatewayMonitorScheduledTask {
     @Scheduled(cron = "0 0 0/1 * * ?")
     public void statisticCronTask() {
 
-        LOGGER.info(">开始网关GatewayMonitorScheduledTask: time:{}" + new Date(System.currentTimeMillis()));
+        LOGGER.info(">开始网关GatewayMonitorScheduledTask: time:{}", new Date(System.currentTimeMillis()));
 
         List<ZuulInfo> zuulist = new ArrayList<ZuulInfo>();
 
@@ -104,8 +104,7 @@ public class GatewayMonitorScheduledTask {
                 String counterKeysuccess = GatewayConstant.APISUMCOUNT + "-" + dateTime;
 
                 String url = "http://" + instatnce;
-                String rst = new String();
-                rst = handler.executeHttpCmd(url, GatewayConstant.ADMINOPTKEY.GWS.getValue(), new Message());
+                String rst = handler.executeHttpCmd(url, GatewayConstant.ADMINOPTKEY.GWS.getValue(), new Message());
 
                 LOGGER.info(">>>> GatewayMonitorScheduledTask remoteCall rst:" + rst);
 

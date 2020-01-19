@@ -22,9 +22,7 @@
 
 package com.creditease.gateway.scheduler;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -47,7 +45,6 @@ import com.creditease.gateway.helper.JsonHelper;
 import com.creditease.gateway.helper.StringHelper;
 import com.creditease.gateway.message.ZuulHandler;
 import com.creditease.gateway.service.SchedulerService;
-import com.creditease.gateway.service.repository.SechduleRepository;
 
 /**
  * 拓扑数据定时统计任务
@@ -65,11 +62,6 @@ public class TopoLogyScheduledTask {
     SchedulerService sts;
 
     @Autowired
-    SechduleRepository schedulerepository;
-
-    SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-    @Autowired
     ZuulHandler handler;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TopoLogyScheduledTask.class);
@@ -80,16 +72,16 @@ public class TopoLogyScheduledTask {
     public void statisticTopoTask() {
 
         LOGGER.info(">开始拓扑统计 ");
-        List<ZuulInfo> zuulist = new ArrayList<ZuulInfo>();
+        List<ZuulInfo> zuuList = new ArrayList<>();
         try {
-            zuulist = sts.getZuulList();
+            zuuList = sts.getZuulList();
         }
         catch (Exception e) {
             LOGGER.error(">TopoLogyScheduledTask Exception:{}", e.getCause());
         }
-        LOGGER.info(">zuulist size:{}", zuulist.size());
+        LOGGER.info(">zuuList size:{}", zuuList.size());
 
-        statisticByZuulList(zuulist);
+        statisticByZuulList(zuuList);
     }
 
     public void statisticByZuulList(List<ZuulInfo> zuulist) {
@@ -99,28 +91,27 @@ public class TopoLogyScheduledTask {
             /**
              * step1: 统计
              */
-            Map<String, Map<String, RouteTopo>> topoTemp = new HashMap<String, Map<String, RouteTopo>>();
+            Map<String, Map<String, RouteTopo>> topoTemp = new HashMap<>(8);
 
             LOGGER.info("statisticByZuulList start...");
 
             for (ZuulInfo zinfo : zuulist) {
 
                 String status = zinfo.getZuulStatus();
-                String instatnce = zinfo.getZuulInstanceId();
+                String instance = zinfo.getZuulInstanceId();
 
                 LOGGER.info("statisticByZuulList status:{}", status);
-                LOGGER.info("statisticByZuulList instatnce:{}", instatnce);
+                LOGGER.info("statisticByZuulList instance:{}", instance);
 
                 if (("Dead").equals(status)) {
                     LOGGER.info(">ZuulInstanceId:{},zinfo status is :", zinfo.getZuulInstanceId(), status);
                     continue;
                 }
-                String url = "http://" + instatnce;
-                String rst = null;
+                String url = "http://" + instance;
 
                 LOGGER.info("statisticTopoTask url:{}", url);
                 try {
-                    rst = handler.executeHttpGetCmd(url, GatewayConstant.ADMINOPTKEY.GTP.getValue());
+                    String rst = handler.executeHttpGetCmd(url, GatewayConstant.ADMINOPTKEY.GTP.getValue());
 
                     LOGGER.info(">>> remoteCall rst:" + rst);
 
@@ -130,23 +121,23 @@ public class TopoLogyScheduledTask {
                     }
 
                     Map<String, Object> response = JsonHelper.toObject(rst, Map.class);
-                    Map<String, String> reqeustValue = (Map<String, String>) response.get("request");
+                    Map<String, String> requestValue = (Map<String, String>) response.get("request");
                     Map<String, Map> responseValue = (Map<String, Map>) response.get("response");
                     // transfer responseVlaue --> Map<String, RouteTopo>
-                    Map<String, RouteTopo> transferTopo = new HashMap<String, RouteTopo>();
+                    Map<String, RouteTopo> transferTopo = new HashMap<>(8);
 
                     LOGGER.info("> start transfer");
                     transfter(transferTopo, responseValue);
                     LOGGER.info("> end transfer");
-                    String zuulgroupName = reqeustValue.get(GatewayConstant.GWGROUPNAME);
+                    String zuulGroupName = requestValue.get(GatewayConstant.GWGROUPNAME);
 
-                    LOGGER.info(">  zuulgroupName >{}", zuulgroupName);
+                    LOGGER.info(">  zuulgroupName >{}", zuulGroupName);
 
-                    Map<String, RouteTopo> routeTopoMap = topoTemp.get(zuulgroupName);
+                    Map<String, RouteTopo> routeTopoMap = topoTemp.get(zuulGroupName);
                     if (null == routeTopoMap) {
                         // 第一级（网关组）不存在
                         if (null != transferTopo) {
-                            topoTemp.put(zuulgroupName, transferTopo);
+                            topoTemp.put(zuulGroupName, transferTopo);
                         }
                         LOGGER.info("> start transferTopo:{}", transferTopo);
                     }
@@ -158,7 +149,7 @@ public class TopoLogyScheduledTask {
                     }
                 }
                 catch (Exception e) {
-                    LOGGER.error("> Exception:{}", e);
+                    LOGGER.error("Exception, url: " + url, e);
                 }
 
             }
@@ -246,7 +237,7 @@ public class TopoLogyScheduledTask {
 
             if (null == routetopo) {
                 // 第二级（网关组下的路由）不存在
-                routeTopoMap.putAll(newTopo);
+                routeTopoMap.put(routeid, newTopo.get(routeid));
             }
             else {
                 // 开始合并相同路由下数据流
@@ -258,13 +249,12 @@ public class TopoLogyScheduledTask {
                 routetopo.getUpstreamNodes().addAll(routeTopoNew.getUpstreamNodes());
 
                 // 合并Link
-
                 Set<Link> linkList = routeTopoNew.getLink();
                 for (Link l : linkList) {
                     routetopo.addLink(l);
                 }
 
-                // 合并Metrix
+                // 合并Metric
                 if (routeTopoNew.getMaxDelay() > routetopo.getMaxDelay()) {
                     routetopo.setMaxDelay(routeTopoNew.getMaxDelay());
                 }
@@ -276,9 +266,9 @@ public class TopoLogyScheduledTask {
                 }
 
                 // 合并exceptionCuse
-                Map expt = routeTopoNew.getExceptionCause();
-                if (null != expt) {
-                    routetopo.getExceptionCause().putAll(expt);
+                Map ex = routeTopoNew.getExceptionCause();
+                if (null != ex) {
+                    routetopo.getExceptionCause().putAll(ex);
                 }
 
                 // 合并Delay
@@ -308,10 +298,5 @@ public class TopoLogyScheduledTask {
     public Map<String, Map<String, RouteTopo>> getTopoAll() {
 
         return this.topoAll.get();
-    }
-
-    public static void main(String args[]) {
-
-        System.out.println(new Date(Long.parseLong("1564664336526")));
     }
 }

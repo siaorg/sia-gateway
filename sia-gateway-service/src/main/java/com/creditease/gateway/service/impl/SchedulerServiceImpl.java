@@ -28,7 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.creditease.gateway.discovery.DiscoveryService;
 import com.creditease.gateway.domain.ZuulInfo;
 import com.creditease.gateway.service.SchedulerService;
-import com.creditease.gateway.service.repository.SechduleRepository;
+import com.creditease.gateway.service.repository.SchedulerRepository;
 
 /**
  * 
@@ -39,7 +39,7 @@ import com.creditease.gateway.service.repository.SechduleRepository;
 public class SchedulerServiceImpl implements SchedulerService {
 
     @Autowired
-    SechduleRepository schdulerRepository;
+    SchedulerRepository schedulerRepository;
 
     @Autowired
     private DiscoveryService zuuldisc;
@@ -57,7 +57,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Override
     public List<ZuulInfo> getZuulList() throws Exception {
 
-        List<ZuulInfo> listdb = schdulerRepository.queryZuulList();
+        List<ZuulInfo> listdb = schedulerRepository.queryZuulList();
         for (ZuulInfo zuul : listdb) {
             String zuulName = zuul.getZuulGroupName();
             List<String> zuulListEureka = zuuldisc.getServiceList(zuulName);
@@ -76,7 +76,6 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Override
     public String getStatisicBindRouteIdlist() throws Exception {
 
-        String rlist = schdulerRepository.queryRouteIdList();
-        return rlist;
+        return schedulerRepository.queryRouteIdList();
     }
 }

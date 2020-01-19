@@ -198,7 +198,7 @@ CREATE TABLE `gateway_fallback` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---admin审计表
+-- admin审计表
 DROP TABLE IF EXISTS `gateway_audit`;
 CREATE TABLE `gateway_audit` (
   `id` int(11) NOT NULL auto_increment COMMENT '操作日志id',
@@ -214,6 +214,17 @@ CREATE TABLE `gateway_audit` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+-- 增加eureka urls表
+DROP TABLE IF EXISTS `gateway_eureka`;
+create table gateway_eureka
+(
+  zuulGroupName varchar(50)  not null
+    primary key,
+  eurekaUrls    varchar(255) not null,
+  enable        tinyint(1)   not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 INSERT INTO `gateway_component` (`id`,`compName`,`compFilterName`,`compType`,`compOrder`,`compUpdateTime`,`status`,`routeidList`,`compdesc`,`zuulGroupName`) VALUES (1,'请求日志组件','LogRequestFilter','PRE',10,'2018-10-16 16:32:23','log','','公共组件','ALL');
 INSERT INTO `gateway_component` (`id`,`compName`,`compFilterName`,`compType`,`compOrder`,`compUpdateTime`,`status`,`routeidList`,`compdesc`,`zuulGroupName`) VALUES (2,'响应日志组件','LogResponsetFilter','POST',0,'2018-10-16 16:32:23','log','','公共组件','ALL');
 INSERT INTO `gateway_component` (`id`,`compName`,`compFilterName`,`compType`,`compOrder`,`compUpdateTime`,`status`,`routeidList`,`compdesc`,`zuulGroupName`) VALUES (3,'统计组件','StatisticFilter','PRE',6,'2018-11-01 11:09:27','ok','','monitor','ALL');
@@ -225,4 +236,6 @@ INSERT INTO `gateway_component` (`id`,`compName`,`compFilterName`,`compType`,`co
 
 ALTER TABLE gateway_counter ADD INDEX instanceIndex (`zuulInstance`);
 ALTER TABLE gateway_counter ADD INDEX groupNameIndex (`zuulGroupName`);
+
+alter table gateway_component  modify column routeidList text;
 
