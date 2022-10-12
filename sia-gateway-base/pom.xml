@@ -19,7 +19,7 @@
 		<spring.version>4.3.15.RELEASE</spring.version>
 		<spring.boot.version>1.5.11.RELEASE</spring.boot.version>
 		<spring.cloud.version>Dalston.SR5</spring.cloud.version>
-		<org.apache.shiro.version>1.4.0</org.apache.shiro.version>
+		<org.apache.shiro.version>1.10.0</org.apache.shiro.version>
 	</properties>
 
 	<dependencyManagement>
